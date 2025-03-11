@@ -9,6 +9,8 @@ class CustomTextField extends StatefulWidget {
   final DateTime? initialDate;
   final DateTime? firstDate;
   final DateTime? lastDate;
+  final Widget? suffixIcon;
+  final VoidCallback? onSuffixIconPressed;
 
   const CustomTextField({
     super.key,
@@ -19,6 +21,8 @@ class CustomTextField extends StatefulWidget {
     this.initialDate,
     this.firstDate,
     this.lastDate,
+    this.suffixIcon,
+    this.onSuffixIconPressed,
   });
 
   @override
@@ -83,24 +87,29 @@ class _CustomTextFieldState extends State<CustomTextField> {
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(color: Colors.grey[400]!),
         ),
-        suffixIcon: widget.obscure
-            ? IconButton(
-                icon: Icon(
-                  _obscureText ? Icons.visibility_off : Icons.visibility,
-                ),
-                onPressed: () {
-                  setState(() {
-                    _obscureText = !_obscureText;
-                  });
-                },
+        suffixIcon: widget.suffixIcon != null
+            ? GestureDetector(
+                onTap: widget.onSuffixIconPressed,
+                child: widget.suffixIcon,
               )
-            : widget.isDateField
-                ? Icon(
-                    Icons.calendar_today,
-                    color: Colors.blue[400],
-                    size: 20,
+            : widget.obscure
+                ? IconButton(
+                    icon: Icon(
+                      _obscureText ? Icons.visibility_off : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
                   )
-                : null,
+                : widget.isDateField
+                    ? Icon(
+                        Icons.calendar_today,
+                        color: Colors.blue[400],
+                        size: 20,
+                      )
+                    : null,
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_intern_template/widgets/custom_appbar.dart';
 import 'package:flutter_intern_template/widgets/custom_button.dart';
+import 'package:flutter_intern_template/widgets/custom_dropdown_widget.dart';
 import 'package:flutter_intern_template/widgets/custom_text_widget.dart';
 import 'package:flutter_intern_template/widgets/custom_textfield.dart';
 
@@ -17,6 +18,7 @@ class _AddAccountPageState extends State<AddAccountPage> {
   final TextEditingController _accNumberController = TextEditingController();
   final TextEditingController _ifscCodeController = TextEditingController();
   String? _selectedBank;
+  final List<String> _banks = ['HDFC Bank', 'Kotak Bank', 'Axis Bank'];
 
   @override
   Widget build(BuildContext context) {
@@ -62,28 +64,16 @@ class _AddAccountPageState extends State<AddAccountPage> {
                   ),
                   const SizedBox(width: 16), // Space between fields
                   Expanded(
-                    flex: 1,
-                    child: DropdownButtonFormField<String>(
-                      value: _selectedBank,
-                      decoration: InputDecoration(
-                        labelText: 'Select Bank',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                      ),
-                      items: ['HDFC Bank', 'Kotak Bank', 'Axis Bank']
-                          .map((bank) => DropdownMenuItem(
-                                value: bank,
-                                child: Text(bank),
-                              ))
-                          .toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedBank = value;
-                        });
-                      },
-                    ),
-                  ),
+                      flex: 1,
+                      child: CustomDropdown(
+                          title: 'Select Bank',
+                          items: _banks,
+                          value: _selectedBank,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedBank = value;
+                            });
+                          })),
                 ],
               ),
 

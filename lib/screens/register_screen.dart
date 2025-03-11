@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_intern_template/widgets/custom_button.dart';
+import 'package:flutter_intern_template/widgets/custom_dropdown_widget.dart';
 import 'package:flutter_intern_template/widgets/custom_textfield.dart';
-import 'package:intl/intl.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -13,6 +13,22 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _termsAccepted = false;
+  String _selectedRegisterType = 'User Register';
+  final List<String> _registerTypes = [
+    'User Register',
+    'Temple Register',
+    'Creator Register'
+  ];
+
+  // State dropdown value
+  String? _selectedState;
+  final List<String> _states = [
+    'MP',
+    'MH',
+    'UP',
+    'RJ',
+    'GJ',
+  ];
 
   // Controllers
   final TextEditingController _dateController = TextEditingController();
@@ -21,6 +37,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  final TextEditingController _currentAddressController =
+      TextEditingController();
+  final TextEditingController _zipCodeController = TextEditingController();
+  final TextEditingController _userIdController = TextEditingController();
+  final TextEditingController _websiteController = TextEditingController();
+
+  // Method to handle location icon press
+  void _handleLocationPress() {
+    // TODO: Implement location functionality
+    print('Location icon pressed - implement location services here');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +62,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // App Bar
+                  // App Bar with Dropdown
                   Padding(
                     padding: const EdgeInsets.only(top: 16.0),
                     child: Row(
@@ -45,14 +72,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               const Icon(Icons.arrow_back, color: Colors.black),
                           onPressed: () => Navigator.pop(context),
                         ),
-                        const Expanded(
+                        const SizedBox(width: 25),
+                        Expanded(
                           child: Center(
-                            child: Text(
-                              'User Register',
-                              style: TextStyle(
+                            child: DropdownButton<String>(
+                              value: _selectedRegisterType,
+                              icon: const Icon(Icons.keyboard_arrow_down),
+                              elevation: 16,
+                              style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
+                                color: Colors.black,
                               ),
+                              underline: Container(
+                                height: 0,
+                              ),
+                              onChanged: (String? value) {
+                                setState(() {
+                                  _selectedRegisterType = value!;
+                                });
+                              },
+                              items: _registerTypes
+                                  .map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
                             ),
                           ),
                         ),
@@ -97,28 +144,131 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 32),
+                  // Upload Photo Button (only for Temple/Creator)
+                  if (_selectedRegisterType != 'User Register')
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          // Add photo upload functionality
+                        },
+                        icon: const Icon(Icons.add),
+                        label: const Text('Upload 5 Photo'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue.shade50,
+                          foregroundColor: Colors.black54,
+                          minimumSize: const Size(double.infinity, 50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                  const SizedBox(height: 16),
 
                   // Form Fields
+                  // Name field (different label based on type)
                   CustomTextField(
-                      labelText: 'Full Name', controller: _nameController),
+                    labelText: _selectedRegisterType == 'Temple Register'
+                        ? 'Temple Name'
+                        : _selectedRegisterType == 'Creator Register'
+                            ? 'Creator Name'
+                            : 'Full Name',
+                    controller: _nameController,
+                  ),
                   const SizedBox(height: 16),
+
                   CustomTextField(
-                      labelText: 'Email Address', controller: _emailController),
+                    labelText: 'Email Address',
+                    controller: _emailController,
+                  ),
                   const SizedBox(height: 16),
+
+                  // Current Address (only for Temple/Creator)
+                  if (_selectedRegisterType != 'User Register')
+                    Column(
+                      children: [
+                        CustomTextField(
+                          labelText: 'Current Address',
+                          controller: _currentAddressController,
+                          suffixIcon:
+                              const Icon(Icons.location_on, color: Colors.blue),
+                          onSuffixIconPressed: _handleLocationPress,
+                        ),
+                        const SizedBox(height: 16),
+
+                        // Zip Code and State with updated design
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CustomTextField(
+                                labelText: 'Zip Code',
+                                controller: _zipCodeController,
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: CustomDropdown(
+                                title: 'State',
+                                items: _states,
+                                value: _selectedState,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedState = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    ),
+
+                  // Date field (different label based on type)
                   CustomTextField(
-                    labelText: 'Date of Birth',
+                    labelText: _selectedRegisterType == 'Temple Register'
+                        ? 'Establishment Date'
+                        : 'Date of Birth',
                     controller: _dateController,
                     isDateField: true,
                   ),
                   const SizedBox(height: 16),
-                  CustomTextField(
-                      labelText: 'Password',
-                      controller: _passwordController,
-                      obscure: true),
-                  const SizedBox(height: 16),
+
+                  // User ID field (for Temple/Creator)
+                  if (_selectedRegisterType != 'User Register')
+                    Column(
+                      children: [
+                        CustomTextField(
+                          labelText: 'User ID',
+                          controller: _userIdController,
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    ),
+
+                  // Website field (only for Temple)
+                  if (_selectedRegisterType == 'Temple Register')
+                    Column(
+                      children: [
+                        CustomTextField(
+                          labelText: 'Website (Optional)',
+                          controller: _websiteController,
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    ),
+
                   CustomTextField(
                     labelText: 'Password',
+                    controller: _passwordController,
+                    obscure: true,
+                  ),
+                  const SizedBox(height: 16),
+
+                  CustomTextField(
+                    labelText: 'Confirm Password',
                     controller: _confirmPasswordController,
                     obscure: true,
                   ),
@@ -158,8 +308,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               TextSpan(
                                 text: 'Term and Conditions',
                                 style: TextStyle(
-                                    color: Colors.blue[400],
-                                    fontWeight: FontWeight.w500),
+                                  color: Colors.blue[400],
+                                  fontWeight: FontWeight.w500,
+                                ),
                                 // Add GestureDetector for terms and conditions
                               ),
                             ],
@@ -194,8 +345,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           TextSpan(
                             text: 'Login',
                             style: TextStyle(
-                                color: Colors.blue[400],
-                                fontWeight: FontWeight.w500),
+                              color: Colors.blue[400],
+                              fontWeight: FontWeight.w500,
+                            ),
                             // Add GestureDetector for login
                           ),
                         ],
