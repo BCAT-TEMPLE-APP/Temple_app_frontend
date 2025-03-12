@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_intern_template/helper/navigation_helper.dart';
 import 'package:flutter_intern_template/screens/add_account_page.dart';
 import 'package:flutter_intern_template/screens/forgot_password_num_page.dart';
+import 'package:flutter_intern_template/screens/home_page.dart';
 import 'package:flutter_intern_template/screens/mobilenum_page.dart';
 import 'package:flutter_intern_template/screens/register_screen.dart';
 import 'package:flutter_intern_template/widgets/custom_text_widget.dart';
@@ -128,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
-                      navigateToPage(context, AddAccountPage());
+                      navigateToPage(context, HomePage());
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,

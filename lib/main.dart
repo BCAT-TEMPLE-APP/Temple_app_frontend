@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_intern_template/screens/login_page.dart';
+import 'package:flutter_intern_template/util/theme_scheme.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
@@ -39,6 +40,9 @@ class _MainAppState extends State<MainApp> {
       ),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
+        themeMode: ThemeMode.system,
         home: LoginPage(),
       ),
     );
