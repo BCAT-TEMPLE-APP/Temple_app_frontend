@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_intern_template/provider/theme_provider.dart';
 import 'package:flutter_intern_template/screens/login_page.dart';
 import 'package:flutter_intern_template/util/theme_scheme.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  runApp(const MainApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatefulWidget {
@@ -42,7 +49,9 @@ class _MainAppState extends State<MainApp> {
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,
-        themeMode: ThemeMode.system,
+        themeMode: Provider.of<ThemeProvider>(context).themeMode,
+        themeAnimationDuration: const Duration(milliseconds: 600),
+        themeAnimationCurve: Curves.easeInOutCirc,
         home: LoginPage(),
       ),
     );

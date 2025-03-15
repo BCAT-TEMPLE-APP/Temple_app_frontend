@@ -4,10 +4,14 @@ flutter_native_splash:
   web: false
 
   color: "#FFFFFF"
+  color_dark: "#121212"
   image: assets/splash/namo_logo.png
+  image_dark: assets/splash/namo_logo.png
 
   android_12:
     color: "#FFFFFF"
+    color_dark: "#121212"
     image: assets/splash/namo_logo_a12.png
+    image_dark: assets/splash/namo_logo_a12.png
 
 

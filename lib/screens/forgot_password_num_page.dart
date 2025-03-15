@@ -3,8 +3,8 @@ import 'package:flutter_intern_template/helper/navigation_helper.dart';
 import 'package:flutter_intern_template/screens/otp_paswd_page.dart';
 import 'package:flutter_intern_template/widgets/countryphone.dart';
 import 'package:flutter_intern_template/widgets/custom_appbar.dart';
+import 'package:flutter_intern_template/widgets/custom_button.dart';
 import 'package:flutter_intern_template/widgets/custom_text_widget.dart';
-import 'package:flutter_intern_template/widgets/custom_textfield.dart';
 
 class ForgotPasswordNumPage extends StatefulWidget {
   const ForgotPasswordNumPage({super.key});
@@ -17,8 +17,9 @@ class _ForgotPasswordNumPageState extends State<ForgotPasswordNumPage> {
   final TextEditingController phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.colorScheme.surface,
       appBar: CustomAppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -38,31 +39,12 @@ class _ForgotPasswordNumPageState extends State<ForgotPasswordNumPage> {
 
                 const SizedBox(height: 30),
                 // Submit Button
-                Center(
-                    child: SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
+                CustomButton(
+                    labelText: 'Reset Password',
                     onPressed: () {
                       navigateToPage(context,
                           OtpPaswdPage(phoneNumber: phoneController.text));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                    ),
-                    child: Text(
-                      'Reset Password',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                )),
+                    }),
               ],
             ),
           ),

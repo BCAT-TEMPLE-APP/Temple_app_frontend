@@ -8,6 +8,7 @@ class CustomTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -16,16 +17,16 @@ class CustomTextWidget extends StatelessWidget {
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: theme.colorScheme.onSurface,
           ),
         ),
         if (subtitle != null) ...[
           const SizedBox(height: 5),
           Text(
             subtitle!,
-            style: const TextStyle(
-              fontSize: 20,
-              color: Colors.grey,
+            style: TextStyle(
+              fontSize: 19,
+              color: theme.colorScheme.outline,
             ),
           ),
         ]

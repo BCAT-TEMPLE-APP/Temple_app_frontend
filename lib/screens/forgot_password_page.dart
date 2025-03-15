@@ -35,8 +35,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.colorScheme.surface,
       appBar: CustomAppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -58,7 +59,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     controller: _passwordController,
                     obscure: true),
 
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
 
                 CustomTextField(
                     labelText: 'Confirm Password',

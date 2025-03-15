@@ -51,8 +51,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.colorScheme.surface,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -68,8 +69,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Row(
                       children: [
                         IconButton(
-                          icon:
-                              const Icon(Icons.arrow_back, color: Colors.black),
+                          icon: Icon(Icons.arrow_back,
+                              color: theme.colorScheme.onSurface),
                           onPressed: () => Navigator.pop(context),
                         ),
                         const SizedBox(width: 25),
@@ -79,10 +80,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               value: _selectedRegisterType,
                               icon: const Icon(Icons.keyboard_arrow_down),
                               elevation: 16,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
-                                color: Colors.black,
+                                color: theme.colorScheme.onSurface,
                               ),
                               underline: Container(
                                 height: 0,
@@ -122,21 +123,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             width: 100,
                             height: 100,
                             decoration: BoxDecoration(
-                              color: Colors.grey[200],
+                              color: theme.colorScheme.outline,
                               shape: BoxShape.circle,
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.add,
                               size: 30,
-                              color: Colors.grey,
+                              color: theme.colorScheme.surface,
                             ),
                           ),
                         ),
                         const SizedBox(height: 8),
-                        const Text(
+                        Text(
                           'Add Profile Picture',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: theme.colorScheme.outline,
                             fontSize: 14,
                           ),
                         ),
@@ -155,8 +156,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         icon: const Icon(Icons.add),
                         label: const Text('Upload 5 Photo'),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue.shade50,
-                          foregroundColor: Colors.black54,
+                          backgroundColor: theme.colorScheme.primary,
+                          foregroundColor: theme.colorScheme.onSurface,
                           minimumSize: const Size(double.infinity, 50),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -192,8 +193,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         CustomTextField(
                           labelText: 'Current Address',
                           controller: _currentAddressController,
-                          suffixIcon:
-                              const Icon(Icons.location_on, color: Colors.blue),
+                          suffixIcon: Icon(Icons.location_on,
+                              color: theme.colorScheme.primary),
                           onSuffixIconPressed: _handleLocationPress,
                         ),
                         const SizedBox(height: 16),
@@ -292,7 +293,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          side: BorderSide(color: Colors.grey[300]!),
+                          side: BorderSide(color: theme.colorScheme.outline),
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -300,7 +301,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: RichText(
                           text: TextSpan(
                             style: TextStyle(
-                                color: Colors.grey[600], fontSize: 14),
+                                color: theme.colorScheme.outline, fontSize: 14),
                             children: [
                               const TextSpan(
                                   text:
@@ -308,7 +309,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               TextSpan(
                                 text: 'Term and Conditions',
                                 style: TextStyle(
-                                  color: Colors.blue[400],
+                                  color: theme.colorScheme.primary,
                                   fontWeight: FontWeight.w500,
                                 ),
                                 // Add GestureDetector for terms and conditions
@@ -338,14 +339,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Center(
                     child: RichText(
                       text: TextSpan(
-                        style:
-                            const TextStyle(color: Colors.black, fontSize: 14),
+                        style: TextStyle(
+                            color: theme.colorScheme.onSurface, fontSize: 14),
                         children: [
                           const TextSpan(text: 'Already have an account? '),
                           TextSpan(
                             text: 'Login',
                             style: TextStyle(
-                              color: Colors.blue[400],
+                              color: theme.colorScheme.primary,
                               fontWeight: FontWeight.w500,
                             ),
                             // Add GestureDetector for login

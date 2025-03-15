@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_intern_template/provider/theme_provider.dart';
+import 'package:flutter_intern_template/widgets/custom_dropdown_widget.dart';
+import 'package:flutter_intern_template/widgets/custom_page_bar.dart';
+import 'package:provider/provider.dart';
 import 'profile_edit_screen.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -16,9 +20,13 @@ class _ProfilePageState extends State<ProfilePage> {
     final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
+      appBar: CustomPageBar(title: "Profile"),
       body: SafeArea(
         child: Column(
           children: [
+            const SizedBox(
+              height: 20,
+            ),
             // Profile Picture & Info
             Column(
               children: [
@@ -83,7 +91,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: [
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 18),
 
                   // GENERAL Section
                   _buildSectionHeader('GENERAL'),
@@ -100,7 +108,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   // SETTINGS Section
                   _buildSectionHeader('SETTINGS'),
-                  _buildDarkModeToggle(),
+                  _buildDarkModeToggle(context),
                   _buildMenuItem(Icons.language, 'Language',
                       'Select Your Favourite Language'),
                   _buildMenuItem(Icons.person, 'Switch To Creator',
@@ -139,8 +147,15 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _buildDarkModeToggle() {
+  Widget _buildDarkModeToggle(BuildContext context) {
     final theme = Theme.of(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final List<Map<String, dynamic>> themeModes = [
+      {"label": "Light", "mode": ThemeMode.light},
+      {"label": "Dark", "mode": ThemeMode.dark},
+      {"label": "System", "mode": ThemeMode.system},
+    ];
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
       child: Row(
@@ -158,32 +173,57 @@ class _ProfilePageState extends State<ProfilePage> {
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Dark Mode',
+              children: const [
+                Text(
+                  'Theme',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                   ),
                 ),
                 Text(
-                  'Switch Theme To Dark Mode',
+                  'Switch Theme Mode',
                   style: TextStyle(
-                    color: theme.colorScheme.onSurface,
                     fontSize: 12,
                   ),
                 ),
               ],
             ),
           ),
-          Switch(
-            value: isDarkModeEnabled,
-            onChanged: (value) {
-              setState(() {
-                isDarkModeEnabled = value;
-              });
-            },
-            activeTrackColor: theme.colorScheme.primary,
+          SizedBox(
+            width: 100,
+            child: Container(
+              decoration: BoxDecoration(
+                color: theme.colorScheme.primaryContainer,
+                borderRadius: BorderRadius.circular(40),
+              ),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<ThemeMode>(
+                  value: themeProvider.themeMode,
+                  dropdownColor: theme.colorScheme
+                      .onInverseSurface, // Dropdown menu background color
+                  borderRadius: BorderRadius.circular(10), // Rounded dropdown
+                  items:
+                      themeModes.map<DropdownMenuItem<ThemeMode>>((themeMode) {
+                    return DropdownMenuItem<ThemeMode>(
+                      value: themeMode['mode'] as ThemeMode,
+                      child: Text(
+                        themeMode['label'] as String,
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w500),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (ThemeMode? newMode) {
+                    if (newMode != null) {
+                      themeProvider.setThemeMode(newMode);
+                    }
+                  },
+                  icon: Icon(Icons.arrow_drop_down,
+                      color: theme.colorScheme.onSurface),
+                ),
+              ),
+            ),
           ),
         ],
       ),
