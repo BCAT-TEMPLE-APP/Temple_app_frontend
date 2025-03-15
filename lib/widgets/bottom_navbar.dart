@@ -63,7 +63,9 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
                   icon: Icons.home,
                   text: 'Home',
                   leading: SvgPicture.asset(
-                    'assets/icons_bottomnav/home.svg',
+                    widget.selectedIndex == 0
+                        ? 'assets/icons_bottomnav/home_filled.svg'
+                        : 'assets/icons_bottomnav/home.svg',
                     height: 24,
                     colorFilter: ColorFilter.mode(
                       widget.selectedIndex == 0
@@ -77,7 +79,9 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
                   icon: Icons.search,
                   text: 'Search',
                   leading: SvgPicture.asset(
-                    'assets/icons_bottomnav/search.svg',
+                    widget.selectedIndex == 1
+                        ? 'assets/icons_bottomnav/search_filled.svg'
+                        : 'assets/icons_bottomnav/search.svg',
                     height: 24,
                     colorFilter: ColorFilter.mode(
                       widget.selectedIndex == 1
@@ -91,7 +95,9 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
                   icon: Icons.add,
                   text: 'Add',
                   leading: SvgPicture.asset(
-                    'assets/icons_bottomnav/video.svg',
+                    widget.selectedIndex == 2
+                        ? 'assets/icons_bottomnav/video_filled.svg'
+                        : 'assets/icons_bottomnav/video.svg',
                     height: 25,
                     colorFilter: ColorFilter.mode(
                       widget.selectedIndex == 2
@@ -105,8 +111,10 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
                   icon: Icons.person,
                   text: 'Profile',
                   leading: SvgPicture.asset(
-                    'assets/icons_bottomnav/profile.svg',
-                    height: 20,
+                    widget.selectedIndex == 3
+                        ? 'assets/icons_bottomnav/profile_filled.svg'
+                        : 'assets/icons_bottomnav/profile.svg',
+                    height: 24,
                     colorFilter: ColorFilter.mode(
                       widget.selectedIndex == 3
                           ? theme.colorScheme.primary

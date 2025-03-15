@@ -166,14 +166,20 @@ class _ProfilePageState extends State<ProfilePage> {
               color: theme.colorScheme.surfaceContainer,
               borderRadius: BorderRadius.circular(18),
             ),
-            child: Icon(Icons.wb_sunny_outlined,
-                color: theme.colorScheme.onSurface),
+            child: Icon(
+              themeProvider.themeMode == ThemeMode.dark
+                  ? Icons.dark_mode_outlined
+                  : themeProvider.themeMode == ThemeMode.light
+                      ? Icons.light_mode_outlined
+                      : Icons.brightness_auto,
+              color: theme.colorScheme.onSurface,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
                   'Theme',
                   style: TextStyle(
@@ -182,7 +188,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 Text(
-                  'Switch Theme Mode',
+                  'Current: ${themeModes.firstWhere((item) => item["mode"] == themeProvider.themeMode)["label"]}',
                   style: TextStyle(
                     fontSize: 12,
                   ),
@@ -200,9 +206,8 @@ class _ProfilePageState extends State<ProfilePage> {
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<ThemeMode>(
                   value: themeProvider.themeMode,
-                  dropdownColor: theme.colorScheme
-                      .onInverseSurface, // Dropdown menu background color
-                  borderRadius: BorderRadius.circular(10), // Rounded dropdown
+                  dropdownColor: theme.colorScheme.onInverseSurface,
+                  borderRadius: BorderRadius.circular(10),
                   items:
                       themeModes.map<DropdownMenuItem<ThemeMode>>((themeMode) {
                     return DropdownMenuItem<ThemeMode>(

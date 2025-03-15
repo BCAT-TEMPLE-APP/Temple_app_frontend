@@ -29,8 +29,8 @@ class CreatorCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: screenWidth * 0.15,
-            height: screenWidth * 0.15,
+            width: screenWidth * 0.18,
+            height: screenWidth * 0.18,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
@@ -55,7 +55,7 @@ class CreatorCard extends StatelessWidget {
               fontSize: 12,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 15),
           SizedBox(
             width: screenWidth * 0.15,
             height: 30,
