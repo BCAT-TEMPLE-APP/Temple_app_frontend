@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_intern_template/helper/navigation_helper.dart';
 import 'package:flutter_intern_template/provider/theme_provider.dart';
+import 'package:flutter_intern_template/screens/contact_us_page.dart';
+import 'package:flutter_intern_template/screens/login_page.dart';
 import 'package:flutter_intern_template/widgets/custom_dropdown_widget.dart';
 import 'package:flutter_intern_template/widgets/custom_page_bar.dart';
+import 'package:flutter_intern_template/widgets/profile_item_widget.dart';
 import 'package:provider/provider.dart';
 import 'profile_edit_screen.dart';
 
@@ -95,32 +99,78 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   // GENERAL Section
                   _buildSectionHeader('GENERAL'),
-                  _buildMenuItem(
-                      Icons.people, 'Following', 'Total 220 Following'),
-                  _buildMenuItem(
-                      Icons.bookmark, 'Saved Post', 'Saved Photos, Videos'),
-                  _buildMenuItem(Icons.access_time, 'Event Reminder',
-                      'Saved Events For Reminder'),
-                  _buildMenuItem(
-                      Icons.credit_card, 'Donation', 'Donation History'),
+
+                  // Profile Items
+                  ProfileItemsWidget(
+                    icon: Icons.people,
+                    title: 'Following',
+                    subtitle: 'Total 220 Following',
+                    onTap: () {},
+                  ),
+
+                  ProfileItemsWidget(
+                    icon: Icons.bookmark,
+                    title: 'Saved Post',
+                    subtitle: 'Saved Photos, Videos',
+                    onTap: () {},
+                  ),
+
+                  ProfileItemsWidget(
+                    icon: Icons.access_time,
+                    title: 'Event Reminder',
+                    subtitle: 'Saved Events For Reminder',
+                    onTap: () {},
+                  ),
+
+                  ProfileItemsWidget(
+                    icon: Icons.credit_card,
+                    title: 'Donation',
+                    subtitle: 'Donation History',
+                    onTap: () {},
+                  ),
 
                   const SizedBox(height: 10),
 
                   // SETTINGS Section
                   _buildSectionHeader('SETTINGS'),
                   _buildDarkModeToggle(context),
-                  _buildMenuItem(Icons.language, 'Language',
-                      'Select Your Favourite Language'),
-                  _buildMenuItem(Icons.person, 'Switch To Creator',
-                      'Switch Your Account To Creator'),
+
+                  ProfileItemsWidget(
+                    icon: Icons.language,
+                    title: 'Language',
+                    subtitle: 'Select Your Favourite Language',
+                    onTap: () {},
+                  ),
+
+                  ProfileItemsWidget(
+                    icon: Icons.person,
+                    title: 'Switch To Creator',
+                    subtitle: 'Switch Your Account To Creator',
+                    onTap: () {},
+                  ),
 
                   const SizedBox(height: 10),
 
                   // MORE Section
                   _buildSectionHeader('MORE'),
-                  _buildMenuItem(
-                      Icons.phone, 'Contact Us', 'For more information'),
-                  _buildMenuItem(Icons.logout, 'Logout', ''),
+
+                  ProfileItemsWidget(
+                    icon: Icons.phone,
+                    title: 'Contact Us',
+                    subtitle: 'For more information',
+                    onTap: () {
+                      navigateToPage(context, const ContactUs());
+                    },
+                  ),
+
+                  ProfileItemsWidget(
+                    icon: Icons.logout,
+                    title: 'Logout',
+                    subtitle: 'Logout from the current account',
+                    onTap: () {
+                      navigateToPage(context, LoginPage());
+                    },
+                  ),
                 ],
               ),
             ),
@@ -230,49 +280,6 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMenuItem(IconData icon, String title, String subtitle) {
-    final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceContainer,
-              borderRadius: BorderRadius.circular(18),
-            ),
-            child: Icon(icon, color: theme.colorScheme.onSurface),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                  ),
-                ),
-                if (subtitle.isNotEmpty)
-                  Text(
-                    subtitle,
-                    style: TextStyle(
-                      color: theme.colorScheme.onSurface,
-                      fontSize: 12,
-                    ),
-                  ),
-              ],
-            ),
-          ),
-          Icon(Icons.chevron_right, color: theme.colorScheme.onSurfaceVariant),
         ],
       ),
     );
