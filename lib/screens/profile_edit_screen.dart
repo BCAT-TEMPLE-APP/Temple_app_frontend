@@ -1,6 +1,12 @@
+import 'package:csc_picker_plus/csc_picker_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:country_picker/country_picker.dart';
+import 'package:flutter_intern_template/widgets/countryphone.dart';
+import 'package:flutter_intern_template/widgets/custom_button.dart';
+import 'package:flutter_intern_template/widgets/custom_dropdown_widget.dart';
+import 'package:flutter_intern_template/widgets/custom_textfield.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ProfileEditScreen extends StatefulWidget {
   const ProfileEditScreen({Key? key}) : super(key: key);
@@ -10,16 +16,126 @@ class ProfileEditScreen extends StatefulWidget {
 }
 
 class _ProfileEditScreenState extends State<ProfileEditScreen> {
-  final TextEditingController _nameController = TextEditingController(text: "Madhuresh Chaudhary");
-  final TextEditingController _emailController = TextEditingController(text: "madhuresh@gmail.com");
-  final TextEditingController _phoneController = TextEditingController(text: "999 999 9990");
-  final TextEditingController _addressController = TextEditingController(text: "907 Valley Drive, Allentown");
-  final TextEditingController _zipController = TextEditingController(text: "18109");
-  final TextEditingController _passwordController = TextEditingController(text: "••••••");
-  
+  final TextEditingController _nameController =
+      TextEditingController(text: "Madhuresh Chaudhary");
+  final TextEditingController _emailController =
+      TextEditingController(text: "madhuresh@gmail.com");
+  final TextEditingController _phoneController =
+      TextEditingController(text: "999 999 9990");
+  final TextEditingController _addressController =
+      TextEditingController(text: "907 Valley Drive, Allentown");
+  final TextEditingController _zipController =
+      TextEditingController(text: "18109");
+  final TextEditingController _passwordController =
+      TextEditingController(text: "••••••");
+
+  String _selectedCountry = "United States";
   String _selectedState = "Pennsylvania";
+  String _selectedCity = "";
   String _countryCode = "+91";
   bool _isPhoneVerified = true;
+  bool _isLoadingState = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Add listener to ZIP code controller
+    _zipController.addListener(_updateStateFromZip);
+  }
+
+  void _updateStateFromZip() async {
+    final zipCode = _zipController.text.trim();
+
+    // Don't attempt lookup if zip code is too short
+    if (zipCode.length < 3) return;
+
+    // Only proceed with lookup for supported countries
+    if (_selectedCountry == "United States of America" && zipCode.length == 5) {
+      _lookupUSZipCode(zipCode);
+    } else if (_selectedCountry == "Canada" && zipCode.length >= 3) {
+      _lookupCanadianPostalCode(zipCode);
+    } else if (_selectedCountry == "India" && zipCode.length == 6) {
+      _lookupIndianPinCode(zipCode);
+    }
+    // Add more country-specific handlers as needed
+  }
+
+  void _lookupUSZipCode(String zipCode) async {
+    setState(() => _isLoadingState = true);
+
+    try {
+      // This is a placeholder for a real API call
+      final response =
+          await http.get(Uri.parse('https://api.zippopotam.us/us/$zipCode'));
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final state = data['places'][0]['state'];
+        setState(() {
+          _selectedState = state;
+          _isLoadingState = false;
+        });
+      } else {
+        setState(() => _isLoadingState = false);
+      }
+    } catch (e) {
+      debugPrint('Error looking up US ZIP code: $e');
+      setState(() => _isLoadingState = false);
+    }
+  }
+
+  void _lookupCanadianPostalCode(String postalCode) async {
+    setState(() => _isLoadingState = true);
+
+    try {
+      // This is a placeholder for a real API call
+      final response = await http.get(Uri.parse(
+          'https://api.zippopotam.us/ca/${postalCode.substring(0, 3)}'));
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final province = data['places'][0]['state'];
+        setState(() {
+          _selectedState = province;
+          _isLoadingState = false;
+        });
+      } else {
+        setState(() => _isLoadingState = false);
+      }
+    } catch (e) {
+      debugPrint('Error looking up Canadian postal code: $e');
+      setState(() => _isLoadingState = false);
+    }
+  }
+
+  void _lookupIndianPinCode(String pinCode) async {
+    setState(() => _isLoadingState = true);
+
+    try {
+      // This is a placeholder for a real API call
+      final response = await http
+          .get(Uri.parse('https://api.postalpincode.in/pincode/$pinCode'));
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data[0]['Status'] == 'Success') {
+          final state = data[0]['PostOffice'][0]['State'];
+          setState(() {
+            _selectedState = state;
+            _isLoadingState = false;
+          });
+        } else {
+          setState(() => _isLoadingState = false);
+        }
+      } else {
+        setState(() => _isLoadingState = false);
+      }
+    } catch (e) {
+      debugPrint('Error looking up Indian PIN code: $e');
+      setState(() => _isLoadingState = false);
+    }
+  }
 
   @override
   void dispose() {
@@ -32,52 +148,33 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     super.dispose();
   }
 
-  Widget _buildFormField({
-    required String label,
-    required Widget child,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: child,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    final inputDecoration = InputDecoration(
-      labelText: 'Label',
-      floatingLabelBehavior: FloatingLabelBehavior.always,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: Color(0xFF29B6F6), width: 2),
-      ),
-      fillColor: Colors.white,
-      filled: true,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-    );
+    final theme = Theme.of(context);
+
+    // Determine ZIP/Postal code label based on country
+    String zipLabel = 'ZIP Code';
+    if (_selectedCountry == 'Canada') {
+      zipLabel = 'Postal Code';
+    } else if (_selectedCountry == 'India') {
+      zipLabel = 'PIN Code';
+    } else if (_selectedCountry == 'United Kingdom') {
+      zipLabel = 'Postcode';
+    }
 
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: theme.colorScheme.onSurface),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
+        title: Text(
           'Edit Profile',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: theme.colorScheme.onSurface),
         ),
-        backgroundColor: Colors.white,
         elevation: 0,
+        backgroundColor: theme.colorScheme.surface,
       ),
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
@@ -93,7 +190,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       height: 100,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border: Border.all(color: const Color(0xFF29B6F6), width: 3),
+                        border: Border.all(
+                            color: theme.colorScheme.primary, width: 3),
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(50),
@@ -104,8 +202,9 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           height: 100,
                           errorBuilder: (context, error, stackTrace) {
                             return Container(
-                              color: Colors.grey.shade300,
-                              child: const Icon(Icons.person, size: 50, color: Colors.grey),
+                              color: theme.colorScheme.outline,
+                              child: Icon(Icons.person,
+                                  size: 50, color: theme.colorScheme.outline),
                             );
                           },
                         ),
@@ -116,13 +215,13 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       right: 0,
                       child: Container(
                         padding: const EdgeInsets.all(4),
-                        decoration: const BoxDecoration(
-                          color: Color(0xFF29B6F6),
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.primary,
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.edit,
-                          color: Colors.white,
+                          color: theme.colorScheme.onSurface,
                           size: 16,
                         ),
                       ),
@@ -133,136 +232,92 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               const SizedBox(height: 24),
 
               // Form Fields
-              TextField(
-                controller: _nameController,
-                decoration: inputDecoration.copyWith(
-                  labelText: 'Full Name',
-                  hintText: 'Enter your full name',
-                ),
-              ),
+              CustomTextField(
+                  labelText: 'Full Name', controller: _nameController),
+
               const SizedBox(height: 16),
 
-              TextField(
-                controller: _emailController,
-                decoration: inputDecoration.copyWith(
+              // Email Address Field
+              CustomTextField(
                   labelText: 'Email Address',
-                  hintText: 'Enter your email address',
-                ),
-                keyboardType: TextInputType.emailAddress,
-              ),
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress),
+
               const SizedBox(height: 16),
 
               // Phone Number Field
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade300),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        showCountryPicker(
-                          context: context,
-                          showPhoneCode: true,
-                          onSelect: (Country country) {
-                            setState(() {
-                              _countryCode = '+${country.phoneCode}';
-                            });
-                          },
-                        );
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                        child: Row(
-                          children: [
-                            const Text('🇮🇳', style: TextStyle(fontSize: 24)),
-                            const SizedBox(width: 8),
-                            Text(_countryCode),
-                            const Icon(Icons.arrow_drop_down),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: TextField(
-                        controller: _phoneController,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Phone number',
-                        ),
-                        keyboardType: TextInputType.phone,
-                      ),
-                    ),
-                    if (_isPhoneVerified)
-                      const Padding(
-                        padding: EdgeInsets.only(right: 12),
-                        child: Icon(Icons.check_circle, color: Colors.green),
-                      ),
-                  ],
-                ),
-              ),
+              CountryPhoneInput(phoneController: _phoneController),
+
               const SizedBox(height: 16),
 
-              TextField(
-                controller: _addressController,
-                decoration: inputDecoration.copyWith(
-                  labelText: 'Current Address',
-                  hintText: 'Enter your address',
-                ),
+              // Country, State, City Selection
+              CSCPickerPlus(
+                countryStateLanguage: CountryStateLanguage.englishOrNative,
+                onCountryChanged: (value) {
+                  setState(() {
+                    _selectedCountry = value;
+                  });
+                },
+                onStateChanged: (value) {
+                  setState(() {
+                    _selectedState = value ?? '';
+                  });
+                },
+                onCityChanged: (value) {
+                  setState(() {
+                    _selectedCity = value ?? '';
+                  });
+                },
+                countryDropdownLabel: 'Country',
+                stateDropdownLabel: 'State',
+                cityDropdownLabel: 'City',
+                dropdownDecoration: BoxDecoration(
+                    color: theme.colorScheme.surfaceContainer,
+                    border: Border.all(
+                        color: theme.colorScheme.outline.withAlpha(0x80)),
+                    borderRadius: BorderRadius.circular(16)),
+                disabledDropdownDecoration: BoxDecoration(
+                    color: theme.colorScheme.surfaceContainerHighest,
+                    border: Border.all(
+                        color: theme.colorScheme.outline.withAlpha(0x80)),
+                    borderRadius: BorderRadius.circular(16)),
+                flagState: CountryFlag.ENABLE,
+                searchBarRadius: 16.0,
+                dropdownDialogRadius: 16.0,
+                defaultCountry: CscCountry.India,
               ),
+
               const SizedBox(height: 16),
 
-              // ZIP Code and State in a row
-              Row(
-                children: [
-                  Expanded(
-                    flex: 4,
-                    child: TextField(
-                      controller: _zipController,
-                      decoration: inputDecoration.copyWith(
-                        labelText: 'ZIP Code',
-                        hintText: 'Enter ZIP code',
-                      ),
-                      keyboardType: TextInputType.number,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    flex: 6,
-                    child: DropdownButtonFormField<String>(
-                      value: _selectedState,
-                      decoration: inputDecoration.copyWith(
-                        labelText: 'State',
-                      ),
-                      items: ['Pennsylvania', 'New York', 'California', 'Texas']
-                          .map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        if (newValue != null) {
-                          setState(() => _selectedState = newValue);
-                        }
-                      },
-                    ),
-                  ),
+              // Address Field
+              CustomTextField(
+                  labelText: 'Current Address', controller: _addressController),
+
+              const SizedBox(height: 16),
+
+              // ZIP Code Field
+              CustomTextField(
+                labelText: zipLabel,
+                controller: _zipController,
+                keyboardType:
+                    TextInputType.text, // Allow alphanumeric for postal codes
+                inputFormatters: [
+                  // For Canadian postal codes: A1A 1A1
+                  // For UK postcodes: variable format
+                  // For US: 5 digits
+                  // For India: 6 digits
+                  LengthLimitingTextInputFormatter(10),
                 ],
               ),
+
               const SizedBox(height: 16),
 
-              TextField(
-                controller: _passwordController,
-                decoration: inputDecoration.copyWith(
+              // Change Password
+              CustomTextField(
                   labelText: 'Password',
-                  hintText: 'Enter password',
-                  
-                ),
-                obscureText: true,
-              ),
+                  controller: _passwordController,
+                  obscure: true),
+
               const SizedBox(height: 24),
 
               // Buttons
@@ -278,40 +333,24 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text(
                       'Change Password',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: theme.colorScheme.onSurface,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     SizedBox(width: 8),
-                    Icon(Icons.arrow_forward, size: 18, color: Colors.black),
+                    Icon(Icons.arrow_forward,
+                        size: 18, color: theme.colorScheme.onSurface),
                   ],
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 20),
 
-              ElevatedButton(
-                onPressed: () {
-                  // Handle save changes
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF1DCAFF),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  minimumSize: const Size(double.infinity, 56),
-                ),
-                child: const Center(
-                  child: Text(
-                    'Save Changes',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
+              CustomButton(labelText: 'Save Changes', onPressed: () {}),
             ],
           ),
         ),

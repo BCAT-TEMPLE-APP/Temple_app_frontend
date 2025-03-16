@@ -17,6 +17,7 @@ class CustomButton extends StatefulWidget {
 class _CustomButtonState extends State<CustomButton> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Center(
       child: SizedBox(
         width: double.infinity,
@@ -24,7 +25,7 @@ class _CustomButtonState extends State<CustomButton> {
         child: ElevatedButton(
           onPressed: widget.onPressed, // Use the provided function
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
+            backgroundColor: theme.colorScheme.primary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18),
             ),
@@ -33,7 +34,7 @@ class _CustomButtonState extends State<CustomButton> {
             widget.labelText,
             style: TextStyle(
               fontSize: 18,
-              color: Colors.white,
+              color: theme.colorScheme.surface,
               fontWeight: FontWeight.bold,
             ),
           ),

@@ -13,11 +13,13 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.colorScheme.surface,
       elevation: 0,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back, color: Colors.black),
+        icon: Icon(Icons.arrow_back, color: theme.colorScheme.onSurface),
         onPressed: () {
           Navigator.pop(context);
         },

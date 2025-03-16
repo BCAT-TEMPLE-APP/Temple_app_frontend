@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -11,6 +12,8 @@ class CustomTextField extends StatefulWidget {
   final DateTime? lastDate;
   final Widget? suffixIcon;
   final VoidCallback? onSuffixIconPressed;
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextField({
     super.key,
@@ -23,6 +26,8 @@ class CustomTextField extends StatefulWidget {
     this.lastDate,
     this.suffixIcon,
     this.onSuffixIconPressed,
+    this.keyboardType,
+    this.inputFormatters,
   });
 
   @override
@@ -41,6 +46,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   }
 
   Future<void> _selectDate(BuildContext context) async {
+    final theme = Theme.of(context);
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: _selectedDate ?? DateTime.now(),
@@ -48,10 +54,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
       lastDate: widget.lastDate ?? DateTime.now(),
       builder: (context, child) {
         return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: Colors.blue[400]!,
-            ),
+          data: theme.copyWith(
+            colorScheme: theme.colorScheme,
           ),
           child: child!,
         );
@@ -68,24 +72,32 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return TextField(
+      keyboardType: widget.keyboardType,
+      inputFormatters: widget.inputFormatters ?? [],
       obscureText: _obscureText,
       controller: widget.controller,
       readOnly: widget.isDateField,
       onTap: widget.isDateField ? () => _selectDate(context) : null,
       decoration: InputDecoration(
         labelText: widget.labelText,
+        fillColor: theme.colorScheme.surfaceContainer,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: Colors.grey[300]!),
+          borderSide:
+              BorderSide(color: theme.colorScheme.outline.withAlpha(0x80)),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: Colors.grey[300]!),
+          borderSide:
+              BorderSide(color: theme.colorScheme.outline.withAlpha(0x80)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: Colors.grey[400]!),
+          borderSide:
+              BorderSide(color: theme.colorScheme.outline.withAlpha(0x80)),
         ),
         suffixIcon: widget.suffixIcon != null
             ? GestureDetector(
@@ -106,7 +118,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 : widget.isDateField
                     ? Icon(
                         Icons.calendar_today,
-                        color: Colors.blue[400],
+                        color: theme.colorScheme.primary,
                         size: 20,
                       )
                     : null,

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_intern_template/screens/profile_page.dart';
 import 'package:flutter_intern_template/screens/search_page.dart';
 import 'package:flutter_intern_template/widgets/bottom_navbar.dart';
+import 'package:flutter_intern_template/widgets/custom_page_bar.dart';
 import 'package:flutter_intern_template/widgets/post_widget.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_intern_template/screens/video_screen.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -45,34 +45,8 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Scaffold(
-      appBar: _selectedIndex == 1
-          ? null
-          : AppBar(
-              backgroundColor: theme.colorScheme.surface,
-              elevation: 0,
-              title: Text(
-                'Explore',
-                style: TextStyle(
-                  color: theme.colorScheme.onSurface,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              leading: IconButton(
-                icon: Icon(Icons.menu, color: theme.colorScheme.onSurface),
-                onPressed: () {},
-              ),
-              actions: [
-                IconButton(
-                  icon: Icon(Icons.notifications_outlined,
-                      color: theme.colorScheme.onSurface),
-                  onPressed: () {},
-                ),
-                const SizedBox(width: 8),
-              ],
-            ),
+      appBar: _selectedIndex != 0 ? null : CustomPageBar(title: "Explore"),
       // Replace the direct body with a PageView
       body: PageView(
         controller: _pageController,
@@ -114,7 +88,7 @@ class _HomePageState extends State<HomePage>
           // Search page
           const SearchPage(),
           // Add page
-          const Center(child: Text('Coming Soon')),
+          const VideosScreen(),
           // Profile page
           const ProfilePage(),
         ],

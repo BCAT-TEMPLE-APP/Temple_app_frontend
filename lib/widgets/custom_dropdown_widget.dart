@@ -4,7 +4,7 @@ class CustomDropdown extends StatefulWidget {
   final String title;
   final List<String> items;
   final String? value;
-  final Function(String?) onChanged;
+  final Function(String?)? onChanged;
 
   const CustomDropdown({
     super.key,
@@ -22,6 +22,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
+      
       value: widget.value,
       decoration: InputDecoration(
         labelText: widget.title,

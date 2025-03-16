@@ -5,6 +5,7 @@ import 'package:flutter_intern_template/screens/forgot_password_num_page.dart';
 import 'package:flutter_intern_template/screens/home_page.dart';
 import 'package:flutter_intern_template/screens/mobilenum_page.dart';
 import 'package:flutter_intern_template/screens/register_screen.dart';
+import 'package:flutter_intern_template/widgets/custom_button.dart';
 import 'package:flutter_intern_template/widgets/custom_text_widget.dart';
 import 'package:flutter_intern_template/widgets/custom_textfield.dart';
 import 'package:flutter_svg/svg.dart';
@@ -35,8 +36,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.colorScheme.surface,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -88,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                           width: 24,
                           child: Checkbox(
                             value: _rememberMe,
-                            activeColor: Colors.blue,
+                            activeColor: theme.colorScheme.primary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
                             ),
@@ -100,11 +102,11 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        const Text(
+                        Text(
                           "Remember Me",
                           style: TextStyle(
                             fontSize: 14,
-                            color: Colors.grey,
+                            color: theme.colorScheme.outline,
                           ),
                         ),
                       ],
@@ -113,60 +115,43 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         navigateToPage(context, ForgotPasswordNumPage());
                       },
-                      child: const Text(
+                      child: Text(
                         "Forgot Password?",
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.blue,
+                          color: theme.colorScheme.primary,
                         ),
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 24),
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      navigateToPage(context, HomePage());
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                    ),
-                    child: const Text(
-                      "Login",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                CustomButton(
+                  labelText: 'Login',
+                  onPressed: () {
+                    navigateToPage(context, HomePage());
+                  },
                 ),
                 const SizedBox(height: 24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       "Don't have an account?",
                       style: TextStyle(
                         fontSize: 14,
-                        color: Colors.grey,
+                        color: theme.colorScheme.outline,
                       ),
                     ),
                     TextButton(
                       onPressed: () {
                         navigateToPage(context, RegisterScreen());
                       },
-                      child: const Text(
+                      child: Text(
                         "Register",
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.blue,
+                          color: theme.colorScheme.primary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

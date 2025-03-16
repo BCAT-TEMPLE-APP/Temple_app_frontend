@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_intern_template/widgets/custom_appbar.dart';
+import 'package:flutter_intern_template/widgets/custom_button.dart';
 import 'package:flutter_intern_template/widgets/custom_text_widget.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
@@ -55,8 +56,9 @@ class _OtpPageState extends State<OtpPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.colorScheme.surface,
       appBar: CustomAppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -73,7 +75,7 @@ class _OtpPageState extends State<OtpPage> {
                   "${widget.phoneNumber}",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.blue,
+                    color: theme.colorScheme.primary,
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -81,7 +83,7 @@ class _OtpPageState extends State<OtpPage> {
                 // OTP Input Field
                 OtpTextField(
                   numberOfFields: 5,
-                  borderColor: Color(0xFF512DA8),
+                  borderColor: theme.colorScheme.primary,
                   showFieldAsBox: true,
                   //runs when a code is typed in
                   onCodeChanged: (String code) {
@@ -96,28 +98,7 @@ class _OtpPageState extends State<OtpPage> {
                 const SizedBox(height: 35),
 
                 // Submit Button
-                Center(
-                    child: SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                    ),
-                    child: Text(
-                      'Continue',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                )),
+                CustomButton(labelText: "Continue", onPressed: () {}),
 
                 const SizedBox(height: 20),
 
@@ -132,7 +113,9 @@ class _OtpPageState extends State<OtpPage> {
                           : "Code is send, Resend in $_counter sec",
                       style: TextStyle(
                         fontSize: 16,
-                        color: _isResendEnabled ? Colors.blue : Colors.grey,
+                        color: _isResendEnabled
+                            ? theme.colorScheme.primary
+                            : theme.colorScheme.outline,
                       ),
                     ),
                   ),
