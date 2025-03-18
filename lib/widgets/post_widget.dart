@@ -51,9 +51,9 @@ class PostWidget extends StatelessWidget {
                   ),
                   Text(
                     location,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: Colors.grey,
+                      color: theme.colorScheme.outline,
                     ),
                   ),
                 ],
@@ -120,7 +120,7 @@ class PostWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: RichText(
             text: TextSpan(
-              style: const TextStyle(color: Colors.black),
+              style: TextStyle(color: theme.colorScheme.onSurface),
               children: [
                 const TextSpan(
                   text: 'Liked by ',
@@ -160,11 +160,11 @@ class PostWidget extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {},
-                    child: const Text(
-                      '(More)',
+                    child: Text(
+                      'More',
                       style: TextStyle(
                         fontSize: 14,
-                        color: Colors.grey,
+                        color: theme.colorScheme.primary,
                       ),
                     ),
                   ),
@@ -172,9 +172,9 @@ class PostWidget extends StatelessWidget {
               ),
               Text(
                 timestamp,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey,
+                  color: theme.colorScheme.outline,
                 ),
               ),
             ],

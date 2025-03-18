@@ -16,15 +16,21 @@ class VideoReelItem extends StatefulWidget {
   State<VideoReelItem> createState() => _VideoReelItemState();
 }
 
-class _VideoReelItemState extends State<VideoReelItem> {
+class _VideoReelItemState extends State<VideoReelItem>
+    with SingleTickerProviderStateMixin {
   late VideoPlayerController _controller;
   bool _isInitialized = false;
   bool _hasError = false;
+  late AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
     _initializeVideo();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
   }
 
   void _initializeVideo() {
@@ -56,6 +62,28 @@ class _VideoReelItemState extends State<VideoReelItem> {
     }
   }
 
+  void _showCommentsSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      transitionAnimationController: _animationController,
+      builder: (context) => SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0, 1),
+          end: Offset.zero,
+        ).animate(CurvedAnimation(
+          parent: _animationController,
+          curve: Curves.easeOut,
+        )),
+        child: CommentsSheet(
+          commentCount: widget.videoData['comments'],
+        ),
+      ),
+    );
+    _animationController.forward(from: 0);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -81,7 +109,7 @@ class _VideoReelItemState extends State<VideoReelItem> {
           )
         else
           VideoPlayer(_controller),
-        
+
         // Gradient overlay for better visibility of buttons
         Positioned(
           bottom: 0,
@@ -101,7 +129,7 @@ class _VideoReelItemState extends State<VideoReelItem> {
             ),
           ),
         ),
-        
+
         // Right side action buttons (like, comment, share)
         Positioned(
           right: 16,
@@ -117,7 +145,9 @@ class _VideoReelItemState extends State<VideoReelItem> {
                       widget.videoData['isLiked']
                           ? Icons.favorite
                           : Icons.favorite_border,
-                      color: widget.videoData['isLiked'] ? Colors.red : Colors.white,
+                      color: widget.videoData['isLiked']
+                          ? Colors.red
+                          : Colors.white,
                     ),
                     onPressed: widget.onLikePressed,
                   ),
@@ -125,30 +155,20 @@ class _VideoReelItemState extends State<VideoReelItem> {
                 ],
               ),
               const SizedBox(height: 16),
-              
+
               // Comment button
               Column(
                 children: [
                   IconButton(
                     iconSize: 32,
                     icon: const Icon(Icons.chat_bubble_outline),
-                    onPressed: () {
-                      // Show comment sheet
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        backgroundColor: Colors.black.withOpacity(0.8),
-                        builder: (context) => CommentsSheet(
-                          commentCount: widget.videoData['comments'],
-                        ),
-                      );
-                    },
+                    onPressed: _showCommentsSheet,
                   ),
                   Text(widget.videoData['comments'].toString()),
                 ],
               ),
               const SizedBox(height: 16),
-              
+
               // Share button
               Column(
                 children: [
@@ -171,7 +191,7 @@ class _VideoReelItemState extends State<VideoReelItem> {
             ],
           ),
         ),
-        
+
         // Video info overlay (optional)
         Positioned(
           left: 16,
@@ -207,6 +227,7 @@ class _VideoReelItemState extends State<VideoReelItem> {
   @override
   void dispose() {
     _controller.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 }

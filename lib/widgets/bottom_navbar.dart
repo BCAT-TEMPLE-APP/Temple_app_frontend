@@ -93,7 +93,7 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
                 ),
                 GButton(
                   icon: Icons.add,
-                  text: 'Add',
+                  text: 'Videos',
                   leading: SvgPicture.asset(
                     widget.selectedIndex == 2
                         ? 'assets/icons_bottomnav/video_filled.svg'
