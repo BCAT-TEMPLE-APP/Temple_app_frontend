@@ -95,12 +95,12 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
                   icon: Icons.video_file,
                   text: 'Videos',
                   leading: SvgPicture.asset(
-                    widget.selectedIndex == 3
+                    widget.selectedIndex == 2
                         ? 'assets/icons_bottomnav/video_filled.svg'
                         : 'assets/icons_bottomnav/video.svg',
                     height: 25,
                     colorFilter: ColorFilter.mode(
-                      widget.selectedIndex == 3
+                      widget.selectedIndex == 2
                           ? theme.colorScheme.primary
                           : theme.colorScheme.onSurface,
                       BlendMode.srcIn,
@@ -111,12 +111,12 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
                   icon: Icons.person,
                   text: 'Profile',
                   leading: SvgPicture.asset(
-                    widget.selectedIndex == 4
+                    widget.selectedIndex == 3
                         ? 'assets/icons_bottomnav/profile_filled.svg'
                         : 'assets/icons_bottomnav/profile.svg',
                     height: 24,
                     colorFilter: ColorFilter.mode(
-                      widget.selectedIndex == 4
+                      widget.selectedIndex == 3
                           ? theme.colorScheme.primary
                           : theme.colorScheme.onSurface,
                       BlendMode.srcIn,
