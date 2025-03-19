@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/following_page.dart'; // Import to access the FollowItem class
+import '../screens/profile_screens/following_page.dart'; // Import to access the FollowItem class
 
 class FollowCard extends StatelessWidget {
   final FollowItem item;
