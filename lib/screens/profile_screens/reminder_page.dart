@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_intern_template/widgets/custom_widgets/custom_appbar.dart';
+import 'package:flutter_intern_template/widgets/custom_widgets/custom_text_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 // Model class for reminder items
@@ -120,42 +122,10 @@ class _ReminderScreenState extends State<ReminderScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leadingWidth: double.infinity, // Allow leading to take full width
-        leading: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () {
-                Navigator.of(context)
-                    .pop(); // This will navigate back to previous page
-              },
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Reminder',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        toolbarHeight: 82,
-      ),
+      backgroundColor: theme.colorScheme.surface,
+      appBar: CustomAppBar(),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : Padding(
@@ -164,15 +134,11 @@ class _ReminderScreenState extends State<ReminderScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Padding(
-                    padding: EdgeInsets.only(bottom: 12.0),
-                    child: Text(
-                      'Please choose what types of support do you need and let us know.',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
+                      padding: EdgeInsets.only(bottom: 12.0),
+                      child: CustomTextWidget(
+                        title: "Reminder",
+                        subtitle: "Here are your event reminders!",
+                      )),
                   Expanded(
                     child: ListView(
                       children: _reminders.entries.map((entry) {
@@ -190,8 +156,8 @@ class _ReminderScreenState extends State<ReminderScreen> {
                                 ),
                               ),
                             ),
-                            ...entry.value.map(
-                                (reminder) => _buildReminderItem(reminder)),
+                            ...entry.value.map((reminder) =>
+                                _buildReminderItem(reminder, context)),
                           ],
                         );
                       }).toList(),
@@ -208,9 +174,10 @@ class _ReminderScreenState extends State<ReminderScreen> {
     return text[0].toUpperCase() + text.substring(1);
   }
 
-  Widget _buildReminderItem(ReminderItem reminder) {
+  Widget _buildReminderItem(ReminderItem reminder, BuildContext context) {
+    final theme = Theme.of(context);
     return Card(
-      elevation: 0,
+      color: theme.colorScheme.surfaceContainer,
       margin: const EdgeInsets.only(bottom: 16.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -225,59 +192,59 @@ class _ReminderScreenState extends State<ReminderScreen> {
               width: 60,
               height: 60,
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                color: theme.colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(12),
               ),
-            child: Center(
-              child: SvgPicture.asset('assets/icons/reminder.svg',
-              colorFilter: const ColorFilter.mode(
-                  Color(0xFF1DCAFF), // Hex color #1DCAFF
-                  BlendMode.srcIn,
+              child: Center(
+                child: SvgPicture.asset(
+                  'assets/icons/reminder.svg',
+                  colorFilter: ColorFilter.mode(
+                    theme.colorScheme.primary, // Hex color #1DCAFF
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
-            ),
             ),
             // Reminder content
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(left: 12),
                 child: Column(
-
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          reminder.title,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            reminder.title,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
-                      ),
-                      Text(
-                        reminder.time,
-                        style: TextStyle(
-                          color: Colors.grey.shade400,
-                          fontSize: 12,
+                        Text(
+                          reminder.time,
+                          style: TextStyle(
+                            color: theme.colorScheme.onSurfaceVariant,
+                            fontSize: 12,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    reminder.description,
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontSize: 14,
+                      ],
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 4),
+                    Text(
+                      reminder.description,
+                      style: TextStyle(
+                        color: theme.colorScheme.outline,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
             ),
           ],
         ),

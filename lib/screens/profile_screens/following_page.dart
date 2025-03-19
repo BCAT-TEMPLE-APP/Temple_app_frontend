@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_intern_template/widgets/custom_widgets/custom_appbar.dart';
+import 'package:flutter_intern_template/widgets/custom_widgets/custom_text_widget.dart';
 import '../../widgets/follow_card.dart';
 
 // Model class for follow items
@@ -161,62 +163,27 @@ class _FollowingsScreenState extends State<FollowingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leadingWidth: double.infinity, // Allow leading to take full width
-        leading: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () {
-                Navigator.of(context)
-                    .pop(); // This will navigate back to previous page
-              },
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Followings',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        toolbarHeight: 100,
-      ),
+      backgroundColor: theme.colorScheme.surface,
+      appBar: CustomAppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Padding(
-              padding: EdgeInsets.only(bottom: 16.0),
-              child: Text(
-                'Please choose what types of support do you need and let us know.',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 16,
-                ),
-              ),
-            ),
+                padding: EdgeInsets.only(bottom: 16.0),
+                child: CustomTextWidget(
+                  title: "Following",
+                  subtitle: "You are following them",
+                )),
             SearchBar(
               hintText: 'Search...',
               padding: const WidgetStatePropertyAll<EdgeInsets>(
                   EdgeInsets.symmetric(horizontal: 20)),
-              leading: Icon(Icons.search, color: Theme.of(context).colorScheme.onSurface),
+              leading: Icon(Icons.search,
+                  color: Theme.of(context).colorScheme.onSurface),
             ),
             const SizedBox(height: 24),
             Expanded(

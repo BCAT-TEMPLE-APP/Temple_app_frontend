@@ -6,18 +6,19 @@ class FollowCard extends StatelessWidget {
   final VoidCallback? onUnfollowPressed;
 
   const FollowCard({
-    Key? key, 
+    Key? key,
     required this.item,
     this.onUnfollowPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: theme.colorScheme.outline),
+        borderRadius: BorderRadius.circular(18),
       ),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -25,7 +26,7 @@ class FollowCard extends StatelessWidget {
           children: [
             // Image from network URL
             ClipRRect(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(12),
               child: Image.network(
                 item.image,
                 width: 100,
@@ -35,7 +36,7 @@ class FollowCard extends StatelessWidget {
                   return Container(
                     width: 80,
                     height: 80,
-                    color: Colors.grey.shade300,
+                    color: theme.colorScheme.onSurface,
                     child: Icon(
                       item.isPerson ? Icons.person : Icons.place,
                       color: Colors.grey,
@@ -122,17 +123,22 @@ class FollowCard extends StatelessWidget {
                               children: [
                                 Row(
                                   children: [
-                                    const Icon(Icons.star, color: Colors.amber, size: 16),
+                                    const Icon(Icons.star,
+                                        color: Colors.amber, size: 16),
                                     const SizedBox(width: 4),
                                     Text(
                                       item.rating.toString(),
-                                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14),
                                     ),
                                   ],
                                 ),
                                 Text(
                                   '${item.reviews} reviews',
-                                  style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
+                                  style: TextStyle(
+                                      color: Colors.grey.shade600,
+                                      fontSize: 14),
                                 ),
                               ],
                             ),
