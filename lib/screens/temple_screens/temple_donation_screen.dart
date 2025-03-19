@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_intern_template/widgets/custom_widgets/custom_appbar.dart';
 import 'package:flutter_intern_template/widgets/custom_widgets/custom_text_widget.dart';
 
 class DonationScreen extends StatelessWidget {
@@ -9,126 +10,100 @@ class DonationScreen extends StatelessWidget {
     final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
+      appBar: CustomAppBar(),
       body: SafeArea(
-        child: Container(
-          margin: const EdgeInsets.all(16.0),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header with back button
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  children: [
-                    InkWell(
-                      onTap: () => Navigator.pop(context),
-                      child: const Icon(Icons.arrow_back),
-                    ),
-                  ],
-                ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Title and description
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomTextWidget(
+                    title: 'Donation Received',
+                    subtitle:
+                        'Please choose what types of support do you need and let us know.',
+                  )
+                ],
               ),
-
-              // Title and description
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomTextWidget(
-                      title: 'Donation Received',
-                      subtitle:
-                          'Please choose what types of support do you need and let us know.',
-                    )
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 24.0),
-
-              // Total Amount section
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Total Amount',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w500,
-                      ),
+            ),
+            const SizedBox(height: 24.0),
+            // Total Amount section
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Total Amount',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w500,
                     ),
-                    Text(
-                      'Withdraw History',
-                      style: TextStyle(
-                        fontSize: 14.0,
-                        color: Colors.blue[600],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Amount display
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0, top: 8.0),
-                child: Text(
-                  '₹ 12500',
-                  style: TextStyle(
-                    fontSize: 28.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue[600],
                   ),
-                ),
-              ),
-
-              const SizedBox(height: 32.0),
-
-              // Today's donations section
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: Text(
-                  'Today',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w500,
+                  Text(
+                    'Withdraw History',
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: theme.colorScheme.primary,
+                    ),
                   ),
+                ],
+              ),
+            ),
+            // Amount display
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0, top: 8.0),
+              child: Text(
+                '₹ 12500',
+                style: TextStyle(
+                  fontSize: 28.0,
+                  fontWeight: FontWeight.bold,
+                  color: theme.colorScheme.primary,
                 ),
               ),
-
-              const SizedBox(height: 16.0),
-
-              // Donation list
-              Expanded(
-                child: ListView(
-                  children: [
-                    _buildDonationItem(
-                      'Kedarnath',
-                      '10:30 AM',
-                      125.00,
-                      'assets/images/kedarnath.jpg',
-                    ),
-                    _buildDonationItem(
-                      'Badrinath',
-                      '11:45 AM',
-                      215.00,
-                      'assets/images/badrinath.jpg',
-                    ),
-                    _buildDonationItem(
-                      'Shiv Mandir',
-                      '12:15 PM',
-                      128.00,
-                      'assets/images/shiv_mandir.jpg',
-                    ),
-                  ],
+            ),
+            const SizedBox(height: 32.0),
+            // Today's donations section
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                'Today',
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 16.0),
+            // Donation list
+            Expanded(
+              child: ListView(
+                children: [
+                  _buildDonationItem(
+                    'Kedarnath',
+                    '10:30 AM',
+                    125.00,
+                    'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Kedarnath_Temple_in_Rainy_season.jpg/1200px-Kedarnath_Temple_in_Rainy_season.jpg', // Dummy image URL
+                  ),
+                  _buildDonationItem(
+                    'Badrinath',
+                    '11:45 AM',
+                    215.00,
+                    'https://www.peakadventuretour.com/assets/imgs/badrinath-temple-bnr.webp', // Dummy image URL
+                  ),
+                  _buildDonationItem(
+                    'Jagannath',
+                    '12:15 PM',
+                    128.00,
+                    'https://c.ndtvimg.com/2022-01/4t40lvq_jagannath-puri-_625x300_21_January_22.jpg', // Dummy image URL
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -147,14 +122,12 @@ class DonationScreen extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.0),
               image: DecorationImage(
-                image: AssetImage(imagePath),
+                image: NetworkImage(imagePath),
                 fit: BoxFit.cover,
               ),
             ),
           ),
-
           const SizedBox(width: 16.0),
-
           // Temple name and time
           Expanded(
             child: Column(
@@ -171,13 +144,12 @@ class DonationScreen extends StatelessWidget {
                   time,
                   style: TextStyle(
                     fontSize: 14.0,
-                    color: Colors.grey[600],
+                    color: Colors.grey,
                   ),
                 ),
               ],
             ),
           ),
-
           // Amount
           Text(
             '+ ₹${amount.toStringAsFixed(2)}',

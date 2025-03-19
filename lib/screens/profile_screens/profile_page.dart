@@ -5,10 +5,11 @@ import 'package:flutter_intern_template/provider/theme_provider.dart';
 import 'package:flutter_intern_template/screens/main_screens/contact_us_page.dart';
 import 'package:flutter_intern_template/screens/login_screens/login_page.dart';
 import 'package:flutter_intern_template/screens/profile_screens/reminder_page.dart';
+import 'package:flutter_intern_template/screens/profile_screens/saved_post.dart';
+import 'package:flutter_intern_template/screens/temple_screens/temple_donation_screen.dart';
 import 'package:flutter_intern_template/widgets/custom_widgets/custom_dropdown_widget.dart';
 import 'package:flutter_intern_template/widgets/custom_widgets/custom_page_bar.dart';
 import 'package:flutter_intern_template/widgets/custom_widgets/profile_item_widget.dart';
-
 
 import 'package:provider/provider.dart';
 import 'package:flutter_intern_template/screens/profile_screens/following_page.dart';
@@ -119,7 +120,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     icon: Icons.bookmark,
                     title: 'Saved Post',
                     subtitle: 'Saved Photos, Videos',
-                    onTap: () {},
+                    onTap: () {
+                      navigateToPage(context, const SavedPostScreen());
+                    },
                   ),
 
                   ProfileItemsWidget(
@@ -135,7 +138,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     icon: Icons.credit_card,
                     title: 'Donation',
                     subtitle: 'Donation History',
-                    onTap: () {},
+                    onTap: () {
+                      navigateToPage(context, DonationScreen());
+                    },
                   ),
 
                   const SizedBox(height: 10),

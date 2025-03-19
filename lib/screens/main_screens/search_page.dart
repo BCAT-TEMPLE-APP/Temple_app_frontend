@@ -291,11 +291,16 @@ class _SearchPageState extends State<SearchPage>
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  TempleCard(
-                    image:
-                        'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe',
-                    name: 'Kedarnath Mandir',
-                    location: 'Uttarakhand',
+                  InkWell(
+                    onTap: () {
+                      navigateToPage(context, TemplePage());
+                    },
+                    child: TempleCard(
+                      image:
+                          'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe',
+                      name: 'Kedarnath Mandir',
+                      location: 'Uttarakhand',
+                    ),
                   ),
                   const SizedBox(width: 12),
                   TempleCard(
