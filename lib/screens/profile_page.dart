@@ -3,10 +3,12 @@ import 'package:flutter_intern_template/helper/navigation_helper.dart';
 import 'package:flutter_intern_template/provider/theme_provider.dart';
 import 'package:flutter_intern_template/screens/contact_us_page.dart';
 import 'package:flutter_intern_template/screens/login_page.dart';
+import 'package:flutter_intern_template/screens/reminder_page.dart';
 import 'package:flutter_intern_template/widgets/custom_dropdown_widget.dart';
 import 'package:flutter_intern_template/widgets/custom_page_bar.dart';
 import 'package:flutter_intern_template/widgets/profile_item_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_intern_template/screens/following_page.dart';
 import 'profile_edit_screen.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -105,7 +107,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     icon: Icons.people,
                     title: 'Following',
                     subtitle: 'Total 220 Following',
-                    onTap: () {},
+                    onTap: () {
+                      navigateToPage(context, const FollowingsScreen());
+                    },
                   ),
 
                   ProfileItemsWidget(
@@ -119,7 +123,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     icon: Icons.access_time,
                     title: 'Event Reminder',
                     subtitle: 'Saved Events For Reminder',
-                    onTap: () {},
+                    onTap: () {
+                      navigateToPage(context, const ReminderScreen());
+                    },
                   ),
 
                   ProfileItemsWidget(
