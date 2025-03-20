@@ -1,10 +1,10 @@
 import 'package:csc_picker_plus/csc_picker_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/countryphone.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_button.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_dropdown_widget.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_textfield.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/countryphone.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_button.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_dropdown_widget.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_textfield.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_template/helper/navigation_helper.dart';
-import 'package:flutter_intern_template/screens/profile_screens/following_page.dart';
-import 'package:flutter_intern_template/screens/temple_screens/temple_page.dart';
-import 'package:flutter_intern_template/widgets/card_widgets/custom_creator_card.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_page_bar.dart';
-import 'package:flutter_intern_template/widgets/card_widgets/custom_temple_card.dart';
-import 'package:flutter_intern_template/widgets/follow_card.dart';
+import 'package:flutter_user_app/helper/navigation_helper.dart';
+import 'package:flutter_user_app/screens/profile_screens/following_page.dart';
+import 'package:flutter_user_app/screens/temple_screens/temple_page.dart';
+import 'package:flutter_user_app/widgets/card_widgets/custom_creator_card.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_page_bar.dart';
+import 'package:flutter_user_app/widgets/card_widgets/custom_temple_card.dart';
+import 'package:flutter_user_app/widgets/follow_card.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);

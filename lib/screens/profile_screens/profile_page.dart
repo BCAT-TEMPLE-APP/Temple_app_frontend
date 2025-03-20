@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_template/helper/navigation_helper.dart';
-import 'package:flutter_intern_template/provider/theme_provider.dart';
+import 'package:flutter_user_app/helper/navigation_helper.dart';
+import 'package:flutter_user_app/provider/theme_provider.dart';
 
-import 'package:flutter_intern_template/screens/main_screens/contact_us_page.dart';
-import 'package:flutter_intern_template/screens/login_screens/login_page.dart';
-import 'package:flutter_intern_template/screens/profile_screens/bank_account.dart';
-import 'package:flutter_intern_template/screens/profile_screens/reminder_page.dart';
-import 'package:flutter_intern_template/screens/profile_screens/saved_post.dart';
-import 'package:flutter_intern_template/screens/temple_screens/temple_donation_screen.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_dropdown_widget.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_page_bar.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/profile_item_widget.dart';
+import 'package:flutter_user_app/screens/main_screens/contact_us_page.dart';
+import 'package:flutter_user_app/screens/login_screens/login_page.dart';
+import 'package:flutter_user_app/screens/profile_screens/bank_account.dart';
+import 'package:flutter_user_app/screens/profile_screens/reminder_page.dart';
+import 'package:flutter_user_app/screens/profile_screens/saved_post.dart';
+import 'package:flutter_user_app/screens/temple_screens/temple_donation_screen.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_dropdown_widget.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_page_bar.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/profile_item_widget.dart';
 
 import 'package:provider/provider.dart';
-import 'package:flutter_intern_template/screens/profile_screens/following_page.dart';
+import 'package:flutter_user_app/screens/profile_screens/following_page.dart';
 import 'profile_edit_screen.dart';
 
 class ProfilePage extends StatefulWidget {

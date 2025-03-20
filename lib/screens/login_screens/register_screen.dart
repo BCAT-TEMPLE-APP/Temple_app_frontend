@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_button.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_dropdown_widget.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_textfield.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_button.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_dropdown_widget.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_textfield.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

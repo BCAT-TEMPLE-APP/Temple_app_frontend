@@ -1,6 +1,6 @@
 // tabs/review_tab.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_template/models/temple_model.dart';
+import 'package:flutter_user_app/models/temple_model.dart';
 
 class ReviewTab extends StatelessWidget {
   final List<ReviewModel> reviews;

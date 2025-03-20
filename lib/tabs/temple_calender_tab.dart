@@ -1,6 +1,6 @@
 // tabs/calendar_tab.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_textfield.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_textfield.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarTab extends StatefulWidget {

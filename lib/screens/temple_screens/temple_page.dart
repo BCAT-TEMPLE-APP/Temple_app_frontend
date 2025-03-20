@@ -1,11 +1,11 @@
 // screens/profile_screen.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_template/models/temple_model.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_appbar.dart';
-import 'package:flutter_intern_template/widgets/temple_widgets/temple_page_actions.dart';
-import 'package:flutter_intern_template/widgets/temple_widgets/temple_page_header.dart';
-import 'package:flutter_intern_template/widgets/temple_widgets/temple_page_stats.dart';
-import 'package:flutter_intern_template/widgets/temple_widgets/temple_page_tabs.dart';
+import 'package:flutter_user_app/models/temple_model.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_appbar.dart';
+import 'package:flutter_user_app/widgets/temple_widgets/temple_page_actions.dart';
+import 'package:flutter_user_app/widgets/temple_widgets/temple_page_header.dart';
+import 'package:flutter_user_app/widgets/temple_widgets/temple_page_stats.dart';
+import 'package:flutter_user_app/widgets/temple_widgets/temple_page_tabs.dart';
 
 class TemplePage extends StatefulWidget {
   const TemplePage({super.key});

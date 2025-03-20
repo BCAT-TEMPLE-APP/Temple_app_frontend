@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_template/helper/navigation_helper.dart';
-import 'package:flutter_intern_template/screens/main_screens/home_page.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_appbar.dart';
-import 'package:flutter_intern_template/widgets/card_widgets/custom_card_template.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_text_widget.dart';
+import 'package:flutter_user_app/helper/navigation_helper.dart';
+import 'package:flutter_user_app/screens/main_screens/home_page.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_appbar.dart';
+import 'package:flutter_user_app/widgets/card_widgets/custom_card_template.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_text_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ContactUs extends StatelessWidget {

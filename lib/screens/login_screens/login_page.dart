@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_template/helper/navigation_helper.dart';
-import 'package:flutter_intern_template/screens/login_screens/add_account_page.dart';
-import 'package:flutter_intern_template/screens/login_screens/forgot_password_num_page.dart';
-import 'package:flutter_intern_template/screens/main_screens/home_page.dart';
-import 'package:flutter_intern_template/screens/login_screens/mobilenum_page.dart';
-import 'package:flutter_intern_template/screens/login_screens/register_screen.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_button.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_text_widget.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_textfield.dart';
+import 'package:flutter_user_app/helper/navigation_helper.dart';
+import 'package:flutter_user_app/screens/login_screens/add_account_page.dart';
+import 'package:flutter_user_app/screens/login_screens/forgot_password_num_page.dart';
+import 'package:flutter_user_app/screens/main_screens/home_page.dart';
+import 'package:flutter_user_app/screens/login_screens/mobilenum_page.dart';
+import 'package:flutter_user_app/screens/login_screens/register_screen.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_button.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_text_widget.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_textfield.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LoginPage extends StatefulWidget {

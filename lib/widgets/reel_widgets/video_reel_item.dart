@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-import 'package:flutter_intern_template/widgets/reel_widgets/comments_sheet.dart';
+import 'package:flutter_user_app/widgets/reel_widgets/comments_sheet.dart';
 
 class VideoReelItem extends StatefulWidget {
   final Map<String, dynamic> videoData;

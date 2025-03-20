@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_appbar.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_text_widget.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_appbar.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_text_widget.dart';
 
 class SavedPostScreen extends StatefulWidget {
   const SavedPostScreen({super.key});

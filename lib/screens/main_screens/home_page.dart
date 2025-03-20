@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_template/screens/profile_screens/profile_page.dart';
-import 'package:flutter_intern_template/screens/main_screens/search_page.dart';
-import 'package:flutter_intern_template/widgets/navbar_widgets/bottom_navbar.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_page_bar.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/post_widget.dart';
-import 'package:flutter_intern_template/screens/main_screens/video_screen.dart';
-import 'package:flutter_intern_template/screens/addPost_screens/add_post_page.dart';
+import 'package:flutter_user_app/screens/profile_screens/profile_page.dart';
+import 'package:flutter_user_app/screens/main_screens/search_page.dart';
+import 'package:flutter_user_app/widgets/navbar_widgets/bottom_navbar.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_page_bar.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/post_widget.dart';
+import 'package:flutter_user_app/screens/main_screens/video_screen.dart';
+import 'package:flutter_user_app/screens/addPost_screens/add_post_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

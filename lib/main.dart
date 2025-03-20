@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_intern_template/provider/theme_provider.dart';
-import 'package:flutter_intern_template/screens/login_screens/login_page.dart';
-import 'package:flutter_intern_template/util/theme_scheme.dart';
+import 'package:flutter_user_app/provider/theme_provider.dart';
+import 'package:flutter_user_app/screens/login_screens/login_page.dart';
+import 'package:flutter_user_app/util/theme_scheme.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 

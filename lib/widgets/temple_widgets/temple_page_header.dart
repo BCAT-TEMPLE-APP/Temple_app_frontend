@@ -1,6 +1,6 @@
 // widgets/profile_header.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_template/models/temple_model.dart';
+import 'package:flutter_user_app/models/temple_model.dart';
 
 class ProfileHeader extends StatelessWidget {
   final TempleModel profile;

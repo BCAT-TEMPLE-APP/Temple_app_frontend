@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_appbar.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_button.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_text_widget.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_appbar.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_button.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_text_widget.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
 class OtpPage extends StatefulWidget {

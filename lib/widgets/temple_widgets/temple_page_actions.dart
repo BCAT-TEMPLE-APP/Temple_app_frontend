@@ -1,7 +1,7 @@
 // widgets/profile_actions.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_template/models/temple_model.dart';
-import 'package:flutter_intern_template/screens/temple_screens/temple_donation_screen.dart';
+import 'package:flutter_user_app/models/temple_model.dart';
+import 'package:flutter_user_app/screens/temple_screens/temple_donation_screen.dart';
 
 class ProfileActions extends StatelessWidget {
   final TempleModel profile;

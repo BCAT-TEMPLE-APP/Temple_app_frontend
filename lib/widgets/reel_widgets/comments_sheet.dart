@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_template/models/comment_model.dart';
+import 'package:flutter_user_app/models/comment_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CommentsSheet extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_template/widgets/reel_widgets/modified_reel_video.dart';
+import 'package:flutter_user_app/widgets/reel_widgets/modified_reel_video.dart';
 import 'package:video_player/video_player.dart';
-import 'package:flutter_intern_template/widgets/reel_widgets/video_reel_item.dart';
+import 'package:flutter_user_app/widgets/reel_widgets/video_reel_item.dart';
 import '../../widgets/custom_widgets/custom_page_bar.dart';
 
 class VideosScreen extends StatefulWidget {

@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_intern_template/helper/navigation_helper.dart';
-import 'package:flutter_intern_template/screens/login_screens/forgot_password_page.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_appbar.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_button.dart';
-import 'package:flutter_intern_template/widgets/custom_widgets/custom_text_widget.dart';
+import 'package:flutter_user_app/helper/navigation_helper.dart';
+import 'package:flutter_user_app/screens/login_screens/forgot_password_page.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_appbar.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_button.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_text_widget.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
 class OtpPaswdPage extends StatefulWidget {
