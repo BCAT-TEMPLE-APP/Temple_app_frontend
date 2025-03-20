@@ -4,6 +4,7 @@ import 'package:flutter_intern_template/provider/theme_provider.dart';
 
 import 'package:flutter_intern_template/screens/main_screens/contact_us_page.dart';
 import 'package:flutter_intern_template/screens/login_screens/login_page.dart';
+import 'package:flutter_intern_template/screens/profile_screens/bank_account.dart';
 import 'package:flutter_intern_template/screens/profile_screens/reminder_page.dart';
 import 'package:flutter_intern_template/screens/profile_screens/saved_post.dart';
 import 'package:flutter_intern_template/screens/temple_screens/temple_donation_screen.dart';
@@ -126,20 +127,20 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
 
                   ProfileItemsWidget(
-                    icon: Icons.access_time,
-                    title: 'Event Reminder',
-                    subtitle: 'Saved Events For Reminder',
-                    onTap: () {
-                      navigateToPage(context, const ReminderScreen());
-                    },
-                  ),
-
-                  ProfileItemsWidget(
-                    icon: Icons.credit_card,
+                    icon: Icons.money,
                     title: 'Donation',
                     subtitle: 'Donation History',
                     onTap: () {
                       navigateToPage(context, DonationScreen());
+                    },
+                  ),
+
+                  ProfileItemsWidget(
+                    icon: Icons.credit_card_outlined,
+                    title: 'Bank Account',
+                    subtitle: 'For recieve Donation',
+                    onTap: () {
+                      navigateToPage(context, const BankAccount());
                     },
                   ),
 
@@ -156,12 +157,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     onTap: () {},
                   ),
 
-                  ProfileItemsWidget(
-                    icon: Icons.person,
-                    title: 'Switch To Creator',
-                    subtitle: 'Switch Your Account To Creator',
-                    onTap: () {},
-                  ),
+
 
                   const SizedBox(height: 10),
 

@@ -17,19 +17,29 @@ class CreatorCard extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Container(
+      // Add constraints to control the size
+      constraints: const BoxConstraints(maxWidth: 120, maxHeight: 180),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainer,
+       color: Colors.white, // Changed to white color
         borderRadius: BorderRadius.circular(16),
-        border:
-            Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.3)),
+        // Removed border and added shadow
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 10,
+            spreadRadius: 0,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20), // Reduce padding
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 80,
-            height: 80,
+            width: 70, // Reduce size slightly
+            height: 70,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
@@ -38,7 +48,7 @@ class CreatorCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 6), // Reduced spacing
           Text(
             name,
             style: TextStyle(
@@ -46,6 +56,8 @@ class CreatorCard extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 14,
             ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
           Text(
             subtitle,
@@ -53,11 +65,13 @@ class CreatorCard extends StatelessWidget {
               color: theme.colorScheme.outline,
               fontSize: 12,
             ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 8), // Reduced spacing
           SizedBox(
             width: 80,
-            height: 30,
+            height: 28, // Reduced height
             child: ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
@@ -67,6 +81,7 @@ class CreatorCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 padding: EdgeInsets.zero,
+                minimumSize: Size.zero, // Allow smaller button size
               ),
               child: const Text(
                 'Follow',

@@ -17,21 +17,31 @@ class TempleCard extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Container(
-      width: 200,
-      margin: const EdgeInsets.symmetric(vertical: 8),
+      // Use a ConstrainedBox to ensure minimum and maximum height
+      constraints: const BoxConstraints(maxWidth: 200, maxHeight: 180),
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 4), // Reduced vertical margin
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainer,
+        color: Colors.white, // Changed to white color
         borderRadius: BorderRadius.circular(16),
-        border:
-            Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.3)),
+        // Removed border and added shadow
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 10,
+            spreadRadius: 0,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(10), // Slightly reduced padding
         child: Column(
+          mainAxisSize: MainAxisSize.min, // Use minimum space needed
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Image container with fixed height
             Container(
-              height: 110,
+              height: 100, // Slightly reduced height
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 image: DecorationImage(
@@ -40,30 +50,41 @@ class TempleCard extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 6), // Reduced spacing
+            // Temple name with constrained height
             Text(
               name,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
               ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
-            Row(
-              children: [
-                Icon(
-                  Icons.location_on,
-                  color: theme.colorScheme.primary,
-                  size: 14,
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  location,
-                  style: TextStyle(
+            // Location info with constrained height
+            SizedBox(
+              height: 20, // Fixed height for location row
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.location_on,
                     color: theme.colorScheme.primary,
-                    fontSize: 12,
+                    size: 14,
                   ),
-                ),
-              ],
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: Text(
+                      location,
+                      style: TextStyle(
+                        color: theme.colorScheme.primary,
+                        fontSize: 12,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
