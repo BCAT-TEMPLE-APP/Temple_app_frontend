@@ -1,0 +1,2 @@
+D:/Internship/NamoHam_user_app/android/app/.cxx/RelWithDebInfo/h67536o3/x86/CMakeFiles/edit_cache.dir
+D:/Internship/NamoHam_user_app/android/app/.cxx/RelWithDebInfo/h67536o3/x86/CMakeFiles/rebuild_cache.dir

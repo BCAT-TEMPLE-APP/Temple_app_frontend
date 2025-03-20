@@ -5,7 +5,6 @@ import 'package:flutter_user_app/widgets/navbar_widgets/bottom_navbar.dart';
 import 'package:flutter_user_app/widgets/custom_widgets/custom_page_bar.dart';
 import 'package:flutter_user_app/widgets/custom_widgets/post_widget.dart';
 import 'package:flutter_user_app/screens/main_screens/video_screen.dart';
-import 'package:flutter_user_app/screens/addPost_screens/add_post_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -88,8 +87,7 @@ class _HomePageState extends State<HomePage>
           ),
           // Search page
           const SearchPage(),
-          //add post
-          const AddPostPage(),
+
           // Add page
           const VideosScreen(),
           // Profile page

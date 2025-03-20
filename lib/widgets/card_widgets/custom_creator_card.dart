@@ -21,17 +21,10 @@ class CreatorCard extends StatelessWidget {
       constraints: const BoxConstraints(maxWidth: 120, maxHeight: 180),
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
-       color: Colors.white, // Changed to white color
+        color: theme.colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(16),
-        // Removed border and added shadow
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 10,
-            spreadRadius: 0,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        border:
+            Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.3)),
       ),
       padding: const EdgeInsets.all(20), // Reduce padding
       child: Column(
