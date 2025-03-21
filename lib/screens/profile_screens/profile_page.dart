@@ -157,7 +157,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     onTap: () {},
                   ),
 
+                  const SizedBox(height: 10),
 
+                  ProfileItemsWidget(
+                    icon: Icons.person,
+                    title: 'Switch To Creator ',
+                    subtitle: 'Switch your account to creator',
+                    onTap: () {},
+                  ),
 
                   const SizedBox(height: 10),
 

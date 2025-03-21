@@ -7,10 +7,10 @@ class VideoReelItem extends StatefulWidget {
   final VoidCallback onLikePressed;
 
   const VideoReelItem({
-    Key? key,
+    super.key,
     required this.videoData,
     required this.onLikePressed,
-  }) : super(key: key);
+  });
 
   @override
   State<VideoReelItem> createState() => _VideoReelItemState();
