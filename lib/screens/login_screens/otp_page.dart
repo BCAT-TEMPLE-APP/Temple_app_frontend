@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_user_app/helper/navigation_helper.dart';
+import 'package:flutter_user_app/screens/login_screens/register_screen.dart';
 import 'package:flutter_user_app/widgets/custom_widgets/custom_appbar.dart';
 import 'package:flutter_user_app/widgets/custom_widgets/custom_button.dart';
 import 'package:flutter_user_app/widgets/custom_widgets/custom_text_widget.dart';
@@ -98,7 +100,9 @@ class _OtpPageState extends State<OtpPage> {
                 const SizedBox(height: 35),
 
                 // Submit Button
-                CustomButton(labelText: "Continue", onPressed: () {}),
+                CustomButton(
+                    labelText: "Continue",
+                    onPressed: () => navigateToPage(context, RegisterScreen())),
 
                 const SizedBox(height: 20),
 

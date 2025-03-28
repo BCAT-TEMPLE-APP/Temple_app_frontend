@@ -16,19 +16,12 @@ class DonationScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Title and description
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomTextWidget(
-                    title: 'Donation Received',
-                    subtitle:
-                        'Please choose what types of support do you need and let us know.',
-                  )
-                ],
-              ),
+            CustomTextWidget(
+              title: 'Donation Received',
+              subtitle:
+                  'Please choose what types of support do you need and let us know.',
             ),
+
             const SizedBox(height: 24.0),
             // Total Amount section
             Padding(

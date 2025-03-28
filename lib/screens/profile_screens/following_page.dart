@@ -172,12 +172,11 @@ class _FollowingsScreenState extends State<FollowingsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-                padding: EdgeInsets.only(bottom: 16.0),
-                child: CustomTextWidget(
-                  title: "Following",
-                  subtitle: "You are following them",
-                )),
+            CustomTextWidget(
+              title: 'Following',
+              subtitle: 'You are following them',
+            ),
+            const SizedBox(height: 24.0),
             SearchBar(
               hintText: 'Search...',
               padding: const WidgetStatePropertyAll<EdgeInsets>(

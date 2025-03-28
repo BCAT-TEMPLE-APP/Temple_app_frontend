@@ -22,68 +22,73 @@ class _AddAccountPageState extends State<AddAccountPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.colorScheme.surface,
       appBar: CustomAppBar(),
       body: SafeArea(
-          child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 8),
               CustomTextWidget(
                 title: "Add Account",
                 subtitle: "Add Your Bank Account Details to Recieve Donation",
               ),
               const SizedBox(height: 35),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                // Bank Account Details Input Field
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomTextField(
+                        labelText: 'Account Holder Name',
+                        controller: _accHolderNameController),
 
-              // Bank Account Details Input Field
-              CustomTextField(
-                  labelText: 'Account Holder Name',
-                  controller: _accHolderNameController),
+                    const SizedBox(height: 30),
 
-              const SizedBox(height: 30),
+                    CustomTextField(
+                        labelText: 'Bank Account Number',
+                        controller: _accNumberController),
 
-              CustomTextField(
-                  labelText: 'Bank Account Number',
-                  controller: _accNumberController),
+                    const SizedBox(height: 30),
 
-              const SizedBox(height: 30),
-
-              // IFSC Code and Select Bank Row
-              Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: CustomTextField(
-                      labelText: 'IFSC Code',
-                      controller: _ifscCodeController,
+                    // IFSC Code and Select Bank Row
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: CustomTextField(
+                            labelText: 'IFSC Code',
+                            controller: _ifscCodeController,
+                          ),
+                        ),
+                        const SizedBox(width: 16), // Space between fields
+                        Expanded(
+                            flex: 1,
+                            child: CustomDropdown(
+                                title: 'Select Bank',
+                                items: _banks,
+                                value: _selectedBank,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedBank = value;
+                                  });
+                                })),
+                      ],
                     ),
-                  ),
-                  const SizedBox(width: 16), // Space between fields
-                  Expanded(
-                      flex: 1,
-                      child: CustomDropdown(
-                          title: 'Select Bank',
-                          items: _banks,
-                          value: _selectedBank,
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedBank = value;
-                            });
-                          })),
-                ],
+
+                    const SizedBox(height: 40),
+
+                    CustomButton(labelText: "Submit", onPressed: () {}),
+                  ],
+                ),
               ),
-
-              const SizedBox(height: 40),
-
-              CustomButton(labelText: "Submit", onPressed: () {}),
             ],
           ),
         ),
-      )),
+      ),
     );
   }
 }

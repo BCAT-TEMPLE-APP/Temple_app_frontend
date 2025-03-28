@@ -40,12 +40,9 @@ class _SavedPostScreenState extends State<SavedPostScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 25.0, right: 20, bottom: 12),
-            child: CustomTextWidget(
-              title: "Saved Post",
-              subtitle: "The posted pictures and videos are available here",
-            ),
+          CustomTextWidget(
+            title: "Saved Post",
+            subtitle: "The posted pictures and videos are available here",
           ),
           const SizedBox(height: 8),
           Padding(

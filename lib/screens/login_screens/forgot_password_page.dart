@@ -41,38 +41,42 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       appBar: CustomAppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 8),
-                CustomTextWidget(
-                  title: "Set new password",
-                  subtitle: "Create strong and secured\nnew password.",
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomTextWidget(
+                title: "Set new password",
+                subtitle: "Create strong and secured\nnew password.",
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 35),
+
+                    // Password Input Field
+                    CustomTextField(
+                        labelText: 'New Password',
+                        controller: _passwordController,
+                        obscure: true),
+
+                    const SizedBox(height: 20),
+
+                    CustomTextField(
+                        labelText: 'Confirm Password',
+                        controller: _confirmPasswordController,
+                        obscure: true),
+
+                    const SizedBox(height: 30),
+
+                    // Submit Button
+                    CustomButton(
+                        labelText: 'Save Password', onPressed: confirmPassword)
+                  ],
                 ),
-                const SizedBox(height: 35),
-
-                // Password Input Field
-                CustomTextField(
-                    labelText: 'New Password',
-                    controller: _passwordController,
-                    obscure: true),
-
-                const SizedBox(height: 20),
-
-                CustomTextField(
-                    labelText: 'Confirm Password',
-                    controller: _confirmPasswordController,
-                    obscure: true),
-
-                const SizedBox(height: 30),
-
-                // Submit Button
-                CustomButton(
-                    labelText: 'Save Password', onPressed: confirmPassword)
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

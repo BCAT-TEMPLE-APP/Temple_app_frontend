@@ -9,28 +9,31 @@ class CustomTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            color: theme.colorScheme.onSurface,
-          ),
-        ),
-        if (subtitle != null) ...[
-          const SizedBox(height: 5),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Text(
-            subtitle!,
+            title,
             style: TextStyle(
-              fontSize: 19,
-              color: theme.colorScheme.outline,
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+              color: theme.colorScheme.onSurface,
             ),
           ),
-        ]
-      ],
+          if (subtitle != null) ...[
+            const SizedBox(height: 5),
+            Text(
+              subtitle!,
+              style: TextStyle(
+                fontSize: 19,
+                color: theme.colorScheme.outline,
+              ),
+            ),
+          ]
+        ],
+      ),
     );
   }
 }

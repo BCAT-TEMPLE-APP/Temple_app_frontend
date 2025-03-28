@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_user_app/helper/navigation_helper.dart';
 import 'package:flutter_user_app/provider/theme_provider.dart';
+import 'package:flutter_user_app/screens/login_screens/add_account_page.dart';
 
 import 'package:flutter_user_app/screens/main_screens/contact_us_page.dart';
 import 'package:flutter_user_app/screens/login_screens/login_page.dart';
@@ -140,7 +141,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     title: 'Bank Account',
                     subtitle: 'For recieve Donation',
                     onTap: () {
-                      navigateToPage(context, const BankAccount());
+                      navigateToPage(context, const AddAccountPage());
                     },
                   ),
 

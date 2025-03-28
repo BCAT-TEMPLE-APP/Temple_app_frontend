@@ -133,12 +133,10 @@ class _ReminderScreenState extends State<ReminderScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
-                      padding: EdgeInsets.only(bottom: 12.0),
-                      child: CustomTextWidget(
-                        title: "Reminder",
-                        subtitle: "Here are your event reminders!",
-                      )),
+                  CustomTextWidget(
+                    title: "Reminder",
+                    subtitle: "Here are your event reminders!",
+                  ),
                   Expanded(
                     child: ListView(
                       children: _reminders.entries.map((entry) {

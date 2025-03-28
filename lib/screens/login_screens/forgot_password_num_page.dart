@@ -23,30 +23,34 @@ class _ForgotPasswordNumPageState extends State<ForgotPasswordNumPage> {
       appBar: CustomAppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 8),
-                CustomTextWidget(
-                    title: "Forgot Password",
-                    subtitle: "Enter Your Mobile Number to reset the password"),
-                const SizedBox(height: 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomTextWidget(
+                  title: "Forgot Password",
+                  subtitle: "Enter Your Mobile Number to reset the password"),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 30),
 
-                // Phone Number Input Field
-                CountryPhoneInput(phoneController: phoneController),
+                    // Phone Number Input Field
+                    CountryPhoneInput(phoneController: phoneController),
 
-                const SizedBox(height: 30),
-                // Submit Button
-                CustomButton(
-                    labelText: 'Reset Password',
-                    onPressed: () {
-                      navigateToPage(context,
-                          OtpPaswdPage(phoneNumber: phoneController.text));
-                    }),
-              ],
-            ),
+                    const SizedBox(height: 30),
+                    // Submit Button
+                    CustomButton(
+                        labelText: 'Reset Password',
+                        onPressed: () {
+                          navigateToPage(context,
+                              OtpPaswdPage(phoneNumber: phoneController.text));
+                        }),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
