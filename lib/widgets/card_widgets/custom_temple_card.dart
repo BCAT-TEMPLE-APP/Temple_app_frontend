@@ -45,40 +45,46 @@ class TempleCard extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 6), // Reduced spacing
+            const SizedBox(height: 8), // Reduced spacing
             // Temple name with constrained height
-            Text(
-              name,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 7),
+              child: Text(
+                name,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
             ),
             // Location info with constrained height
-            SizedBox(
-              height: 20, // Fixed height for location row
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.location_on,
-                    color: theme.colorScheme.primary,
-                    size: 14,
-                  ),
-                  const SizedBox(width: 4),
-                  Expanded(
-                    child: Text(
-                      location,
-                      style: TextStyle(
-                        color: theme.colorScheme.primary,
-                        fontSize: 12,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 7),
+              child: SizedBox(
+                height: 20, // Fixed height for location row
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.location_on,
+                      color: theme.colorScheme.primary,
+                      size: 14,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 4),
+                    Expanded(
+                      child: Text(
+                        location,
+                        style: TextStyle(
+                          color: theme.colorScheme.primary,
+                          fontSize: 12,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

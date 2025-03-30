@@ -282,12 +282,11 @@ class _SearchPageState extends State<SearchPage>
               ],
             ),
 
-            const SizedBox(height: 12),
+            const SizedBox(height: 8),
 
             // Temple Cards
             SizedBox(
-              height: MediaQuery.of(context).size.height *
-                  0.22, // Make height responsive
+              height: 200,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
@@ -324,15 +323,14 @@ class _SearchPageState extends State<SearchPage>
               ),
             ),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 18),
 
             // Creator Cards with Horizontal Scroll
             SizedBox(
-              height: MediaQuery.of(context).size.height *
-                  0.25, // Make height responsive
+              height: 200,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                padding: const EdgeInsets.only(bottom: 8),
                 children: const [
                   CreatorCard(
                     image: 'https://randomuser.me/api/portraits/men/32.jpg',

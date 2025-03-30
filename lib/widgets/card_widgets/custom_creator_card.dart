@@ -18,15 +18,14 @@ class CreatorCard extends StatelessWidget {
 
     return Container(
       // Add constraints to control the size
-      constraints: const BoxConstraints(maxWidth: 120, maxHeight: 180),
-      margin: const EdgeInsets.symmetric(vertical: 8),
+      constraints: const BoxConstraints(maxWidth: 250, maxHeight: 350),
       decoration: BoxDecoration(
         color: theme.colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(16),
         border:
             Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.3)),
       ),
-      padding: const EdgeInsets.all(20), // Reduce padding
+      padding: const EdgeInsets.all(20),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -41,7 +40,7 @@ class CreatorCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 6), // Reduced spacing
+          const SizedBox(height: 6),
           Text(
             name,
             style: TextStyle(
@@ -61,10 +60,10 @@ class CreatorCard extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          const SizedBox(height: 8), // Reduced spacing
+          const SizedBox(height: 8),
           SizedBox(
             width: 80,
-            height: 28, // Reduced height
+            height: 28,
             child: ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(

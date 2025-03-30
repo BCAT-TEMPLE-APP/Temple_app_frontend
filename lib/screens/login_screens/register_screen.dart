@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/custom_appbar.dart';
 import 'package:flutter_user_app/widgets/custom_widgets/custom_button.dart';
 import 'package:flutter_user_app/widgets/custom_widgets/custom_dropdown_widget.dart';
 import 'package:flutter_user_app/widgets/custom_widgets/custom_textfield.dart';
@@ -42,6 +43,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _zipCodeController = TextEditingController();
   final TextEditingController _userIdController = TextEditingController();
   final TextEditingController _websiteController = TextEditingController();
+  final TextEditingController _mapController = TextEditingController();
 
   // Method to handle location icon press
   void _handleLocationPress() {
@@ -54,6 +56,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
+      appBar: CustomAppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -63,21 +66,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // App Bar with Dropdown
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: Row(
-                      children: [
-                        IconButton(
-                          icon: Icon(Icons.arrow_back,
-                              color: theme.colorScheme.onSurface),
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                        const SizedBox(width: 25),
-                        Expanded(
-                          child: Center(
+                  Row(
+                    children: [
+                      const SizedBox(width: 48),
+                      Expanded(
+                        child: Center(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: theme.colorScheme.surfaceContainerHighest,
+                              borderRadius: BorderRadius.circular(50),
+                            ),
                             child: DropdownButton<String>(
                               value: _selectedRegisterType,
+                              borderRadius: BorderRadius.circular(10),
+                              dropdownColor:
+                                  theme.colorScheme.surfaceContainerHighest,
                               icon: const Icon(Icons.keyboard_arrow_down),
                               elevation: 16,
                               style: TextStyle(
@@ -104,9 +107,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 48), // Balance the appbar
-                      ],
-                    ),
+                      ),
+                      const SizedBox(width: 48), // Balance the appbar
+                    ],
                   ),
 
                   const SizedBox(height: 24),
@@ -157,7 +160,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         label: const Text('Upload 5 Photo'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: theme.colorScheme.primary,
-                          foregroundColor: theme.colorScheme.onSurface,
+                          foregroundColor: theme.colorScheme.surface,
                           minimumSize: const Size(double.infinity, 50),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -256,6 +259,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         CustomTextField(
                           labelText: 'Website (Optional)',
                           controller: _websiteController,
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    ),
+                  if (_selectedRegisterType == 'Temple Register')
+                    Column(
+                      children: [
+                        CustomTextField(
+                          labelText: 'Google Map Link',
+                          controller: _mapController,
                         ),
                         const SizedBox(height: 16),
                       ],

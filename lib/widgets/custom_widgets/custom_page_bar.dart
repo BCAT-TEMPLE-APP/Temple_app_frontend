@@ -18,7 +18,7 @@ class _CustomPageBarState extends State<CustomPageBar> {
     final theme = Theme.of(context);
     return AppBar(
       backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.2),
-      elevation: 2,
+      forceMaterialTransparency: true,
       title: Center(
         child: Text(
           widget.title,
