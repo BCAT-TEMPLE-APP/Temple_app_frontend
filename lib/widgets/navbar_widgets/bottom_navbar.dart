@@ -51,7 +51,8 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
               iconSize: 22,
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               duration: const Duration(milliseconds: 400),
-              tabBackgroundColor: theme.colorScheme.secondaryContainer,
+              tabBackgroundColor:
+                  theme.colorScheme.secondaryContainer.withAlpha(90),
               color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
               textStyle: TextStyle(
                 color: theme.colorScheme.primary,
