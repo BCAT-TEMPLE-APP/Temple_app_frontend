@@ -92,8 +92,30 @@ class _CountryPhoneInputState extends State<CountryPhoneInput> {
   }
 
   void _showCountryPickers() {
+    final theme = Theme.of(context);
+    final screenHeight = MediaQuery.of(context).size.height;
     showCountryPicker(
       context: context,
+      countryListTheme: CountryListThemeData(
+        flagSize: 25,
+        backgroundColor: theme.colorScheme.surfaceContainer,
+        bottomSheetHeight: screenHeight * 0.85,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        ),
+        inputDecoration: InputDecoration(
+          labelText: 'Search',
+          hintText: 'Start typing to search',
+          prefixIcon: const Icon(Icons.search),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: theme.colorScheme.outline,
+            ),
+            borderRadius: BorderRadius.circular(40.0),
+          ),
+        ),
+      ),
       showPhoneCode: true,
       onSelect: (Country country) {
         setState(() {
