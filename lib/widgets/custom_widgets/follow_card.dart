@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import '../screens/profile_screens/following_page.dart'; // Import to access the FollowItem class
+import '../../screens/profile_screens/following_page.dart'; // Import to access the FollowItem class
 
 class FollowCard extends StatelessWidget {
   final FollowItem item;
   final VoidCallback? onUnfollowPressed;
 
   const FollowCard({
-    Key? key,
+    super.key,
     required this.item,
     this.onUnfollowPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +83,8 @@ class FollowCard extends StatelessWidget {
                       OutlinedButton(
                         onPressed: onUnfollowPressed,
                         style: OutlinedButton.styleFrom(
-                          foregroundColor: Colors.blue,
-                          side: const BorderSide(color: Colors.blue),
+                          foregroundColor: theme.colorScheme.primary,
+                          side: BorderSide(color: theme.colorScheme.primary),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),

@@ -5,7 +5,7 @@ import 'package:flutter_user_app/screens/temple_screens/temple_page.dart';
 import 'package:flutter_user_app/widgets/card_widgets/custom_creator_card.dart';
 import 'package:flutter_user_app/widgets/custom_widgets/custom_page_bar.dart';
 import 'package:flutter_user_app/widgets/card_widgets/custom_temple_card.dart';
-import 'package:flutter_user_app/widgets/follow_card.dart';
+import 'package:flutter_user_app/widgets/custom_widgets/follow_card.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -111,6 +111,7 @@ class _SearchPageState extends State<SearchPage>
             padding: const EdgeInsets.all(16.0),
             child: SearchBar(
               controller: _searchController,
+              elevation: WidgetStateProperty.all(1),
               focusNode: _searchFocusNode,
               onChanged: (value) {
                 setState(() {
@@ -145,6 +146,7 @@ class _SearchPageState extends State<SearchPage>
 
   // Custom category button widget
   Widget buildCategory(String categoryName) {
+    final theme = Theme.of(context);
     final isSelected = selectedCategory == categoryName;
     return GestureDetector(
       onTap: () {
@@ -155,8 +157,8 @@ class _SearchPageState extends State<SearchPage>
       child: Container(
         decoration: BoxDecoration(
           color: isSelected
-              ? const Color(0xFF1DCAFF) // Change to the requested color #1DCAFF
-              : const Color.fromRGBO(232, 241, 255, 1),
+              ? theme.colorScheme.primary
+              : theme.colorScheme.primaryContainer.withAlpha(100),
           borderRadius: BorderRadius.circular(12),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -165,7 +167,9 @@ class _SearchPageState extends State<SearchPage>
           child: Text(
             categoryName,
             style: TextStyle(
-              color: isSelected ? Colors.white : Colors.black,
+              color: isSelected
+                  ? theme.colorScheme.onPrimary
+                  : theme.colorScheme.onPrimaryContainer,
               fontSize: 13,
               fontWeight: FontWeight.bold,
             ),

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_user_app/widgets/custom_widgets/custom_appbar.dart';
 import 'package:flutter_user_app/widgets/custom_widgets/custom_text_widget.dart';
-import '../../widgets/follow_card.dart';
+import '../../widgets/custom_widgets/follow_card.dart';
 
 // Model class for follow items
 class FollowItem {
@@ -178,6 +178,7 @@ class _FollowingsScreenState extends State<FollowingsScreen> {
             ),
             const SizedBox(height: 24.0),
             SearchBar(
+              elevation: WidgetStateProperty.all(1),
               hintText: 'Search...',
               padding: const WidgetStatePropertyAll<EdgeInsets>(
                   EdgeInsets.symmetric(horizontal: 20)),

@@ -18,6 +18,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
     return AppBar(
       backgroundColor: theme.colorScheme.surface,
       elevation: 0,
+      forceMaterialTransparency: true,
       leading: IconButton(
         icon: Icon(Icons.arrow_back, color: theme.colorScheme.onSurface),
         onPressed: () {
