@@ -1,0 +1,34 @@
+import 'donation_model.dart';
+import 'review_model.dart';
+
+class TempleModel {
+  final String name;
+  final String description;
+  final String imageUrl;
+  final double rating;
+  final int totalReviews;
+  final int posts;
+  final int followers;
+  final int following;
+  final int recommendationPercentage;
+  final List<ReviewModel> reviews;
+  final List<DonationModel> donations;
+  final double totalDonations;
+  final String location;
+
+  TempleModel({
+    required this.name,
+    required this.description,
+    required this.imageUrl,
+    required this.rating,
+    required this.totalReviews,
+    required this.posts,
+    required this.followers,
+    required this.following,
+    required this.recommendationPercentage,
+    required this.reviews,
+    required this.donations,
+    required this.totalDonations,
+    required this.location,
+  });
+}

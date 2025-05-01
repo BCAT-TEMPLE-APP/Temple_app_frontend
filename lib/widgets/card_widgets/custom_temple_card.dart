@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_user_app/features/temples/data/models/temple_model.dart';
 
-class TempleCard extends StatelessWidget {
-  final String image;
-  final String name;
-  final String location;
+class TempleCard extends StatefulWidget {
+  final TempleModel templeModel;
 
   const TempleCard({
     super.key,
-    required this.image,
-    required this.name,
-    required this.location,
+    required this.templeModel
   });
 
+  @override
+  State<TempleCard> createState() => _TempleCardState();
+}
+
+class _TempleCardState extends State<TempleCard> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -40,7 +42,7 @@ class TempleCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 image: DecorationImage(
-                  image: NetworkImage(image),
+                  image: NetworkImage(widget.templeModel.imageUrl),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -50,7 +52,7 @@ class TempleCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 7),
               child: Text(
-                name,
+                widget.templeModel.name,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 14,
@@ -74,7 +76,7 @@ class TempleCard extends StatelessWidget {
                     const SizedBox(width: 4),
                     Expanded(
                       child: Text(
-                        location,
+                        widget.templeModel.location,
                         style: TextStyle(
                           color: theme.colorScheme.primary,
                           fontSize: 12,
