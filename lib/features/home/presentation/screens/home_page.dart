@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_user_app/features/posts/data/model/dummy_post.dart';
 import 'package:flutter_user_app/features/profile/presentation/screens/profile_page.dart';
 import 'package:flutter_user_app/features/search/presentation/screens/search_page.dart';
 import 'package:flutter_user_app/widgets/navbar_widgets/bottom_navbar.dart';
 import 'package:flutter_user_app/widgets/custom_widgets/custom_page_bar.dart';
-import 'package:flutter_user_app/features/home/presentation/widgets/post_widget.dart';
+import 'package:flutter_user_app/features/posts/presentation/screens/post_screen.dart';
 import 'package:flutter_user_app/features/reels/presentation/screens/video_screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -58,33 +59,7 @@ class _HomePageState extends State<HomePage>
         },
         children: [
           // Home page content
-          ListView(
-            children: const [
-              PostWidget(),
-              PostWidget(
-                username: 'sarah_parker',
-                location: 'Tokyo, Japan',
-                userImage: 'https://randomuser.me/api/portraits/women/32.jpg',
-                postImage:
-                    'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe',
-                caption: 'Perfect Evening with Perfect Food...',
-                likes: '1.2k',
-                likedBy: 'Emma',
-                timestamp: 'Thu, 26 January 2023',
-              ),
-              PostWidget(
-                username: 'john_doe',
-                location: 'Badrinath, India',
-                userImage: 'https://randomuser.me/api/portraits/men/85.jpg',
-                postImage:
-                    'https://images.unsplash.com/photo-1552728089-57bdde30beb3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
-                caption: 'Beautiful morning at Badrinath Temple...',
-                likes: '2.5k',
-                likedBy: 'Sarah',
-                timestamp: 'Fri, 27 January 2023',
-              ),
-            ],
-          ),
+          const PostsScreen(),
           // Search page
           const SearchPage(),
 
