@@ -298,15 +298,21 @@ class _SearchPageState extends State<SearchPage>
                 separatorBuilder: (_, __) => const SizedBox(width: 12),
                 itemBuilder: (context, index) {
                   final temple = dummyTemples[index];
-                  return InkWell(
-                    onTap: () {
-                      navigateToPage(
-                          context,
-                          TemplePage(
-                            templeModel: temple,
-                          )); // Pass temple if needed
+                  return Hero(
+                    tag: temple.imageUrl,
+                    createRectTween: (Rect? begin, Rect? end) {
+                      return CustomRectTween(begin: begin, end: end);
                     },
-                    child: TempleCard(templeModel: temple),
+                    child: TempleCard(
+                      templeModel: temple,
+                      onTap: () {
+                        navigateToPage(
+                            context,
+                            TemplePage(
+                              templeModel: temple,
+                            )); // Pass temple if needed
+                      },
+                    ),
                   );
                 },
               ),
@@ -367,6 +373,24 @@ class _SearchPageState extends State<SearchPage>
           ],
         ),
       ),
+    );
+  }
+}
+
+class CustomRectTween extends RectTween {
+  CustomRectTween({required super.begin, required super.end});
+
+  @override
+  Rect lerp(double t) {
+    // Ensure begin and end are not null
+    final Rect start = begin ?? Rect.zero;
+    final Rect endRect = end ?? Rect.zero;
+
+    return Rect.fromLTWH(
+      start.left + (endRect.left - start.left) * t,
+      start.top + (endRect.top - start.top) * t,
+      start.width + (endRect.width - start.width) * t,
+      start.height + (endRect.height - start.height) * t,
     );
   }
 }
