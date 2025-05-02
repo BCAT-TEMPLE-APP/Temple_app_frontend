@@ -1,4 +1,4 @@
-import 'package:flutter_user_app/features/posts/domain/post_entity.dart';
+import 'package:flutter_user_app/features/posts/domain/entities/post_entity.dart';
 
 class PostModel extends PostEntity {
   PostModel({
@@ -8,7 +8,6 @@ class PostModel extends PostEntity {
     required super.location,
     required super.caption,
     required super.imageUrls,
-    super.comments,
     required super.likes,
     required super.likedBy,
     required super.timestamp,
@@ -22,8 +21,7 @@ class PostModel extends PostEntity {
       location: json['location'],
       caption: json['caption'],
       imageUrls: List<String>.from(json['imageUrls']),
-      comments:
-          json['comments'] != null ? List<String>.from(json['comments']) : null,
+
       likes: json['likes'],
       likedBy: List<String>.from(json['likedBy']),
       timestamp: json['timestamp'],
@@ -38,7 +36,6 @@ class PostModel extends PostEntity {
       'location': location,
       'caption': caption,
       'imageUrls': imageUrls,
-      'comments': comments,
       'likes': likes,
       'likedBy': likedBy,
       'timestamp': timestamp,

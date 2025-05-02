@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_user_app/features/posts/domain/post_entity.dart';
-import 'package:flutter_user_app/features/posts/domain/post_repository.dart';
+import 'package:flutter_user_app/features/posts/domain/entities/post_entity.dart';
+import 'package:flutter_user_app/features/posts/domain/repository/post_repository.dart';
 
 class GetPostsUsecase {
   final PostRepository postRepository;
