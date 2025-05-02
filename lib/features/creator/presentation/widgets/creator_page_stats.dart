@@ -1,9 +1,10 @@
 // widgets/profile_stats.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_user_app/features/creator/data/model/creator_model.dart';
+import 'package:flutter_user_app/features/creator/data/model/creators_model.dart';
+import 'package:flutter_user_app/features/creator/data/model/creators_model.dart';
 
 class CreatorProfileStats extends StatelessWidget {
-  final CreatorModel profile;
+  final CreatorsModel profile;
 
   const CreatorProfileStats({super.key, required this.profile});
 
@@ -14,15 +15,16 @@ class CreatorProfileStats extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _buildStat('${profile.posts}', 'Posts'),
-          _buildStat('${profile.followers}', 'Followers'),
-          _buildStat('${profile.following}', 'Following'),
+          _buildStat('${profile.posts}', 'Posts', context),
+          _buildStat('${profile.followers}', 'Followers', context),
+          _buildStat('${profile.following}', 'Following', context),
         ],
       ),
     );
   }
 
-  Widget _buildStat(String value, String label) {
+  Widget _buildStat(String value, String label, BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       children: [
         Text(
@@ -37,7 +39,7 @@ class CreatorProfileStats extends StatelessWidget {
           label,
           style: TextStyle(
             fontSize: 14,
-            color: Colors.grey[600],
+            color: theme.colorScheme.outline,
           ),
         ),
       ],

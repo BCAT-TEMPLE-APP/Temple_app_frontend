@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_user_app/features/creator/data/model/creators_model.dart';
 
-class CreatorCard extends StatelessWidget {
-  final String image;
-  final String name;
-  final String subtitle;
+class CreatorCard extends StatefulWidget {
+  final CreatorsModel creatorsModel;
+  final VoidCallback? onTap;
 
   const CreatorCard({
     super.key,
-    required this.image,
-    required this.name,
-    required this.subtitle,
+    required this.creatorsModel,
+    required this.onTap,
   });
 
+  @override
+  State<CreatorCard> createState() => _CreatorCardState();
+}
+
+class _CreatorCardState extends State<CreatorCard> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Container(
-      // Add constraints to control the size
-      constraints: const BoxConstraints(maxWidth: 250, maxHeight: 350),
+    return GestureDetector(
+      onTap: widget.onTap,
+      child: Container(
+        // Add constraints to control the size
+        constraints: const BoxConstraints(maxWidth: 150, maxHeight: 350),
       decoration: BoxDecoration(
         color: theme.colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(16),
@@ -35,14 +41,15 @@ class CreatorCard extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                image: NetworkImage(image),
+                image: NetworkImage(widget.creatorsModel.imageUrl),
                 fit: BoxFit.cover,
               ),
+              
             ),
           ),
           const SizedBox(height: 6),
           Text(
-            name,
+            widget.creatorsModel.name,
             style: TextStyle(
               color: theme.colorScheme.onSurface,
               fontWeight: FontWeight.bold,
@@ -52,7 +59,7 @@ class CreatorCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           Text(
-            subtitle,
+            widget.creatorsModel.title,
             style: TextStyle(
               color: theme.colorScheme.outline,
               fontSize: 12,
@@ -83,6 +90,7 @@ class CreatorCard extends StatelessWidget {
           ),
         ],
       ),
+    ),
     );
   }
 }

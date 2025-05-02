@@ -1,13 +1,20 @@
 // widgets/profile_tabs.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_user_app/features/creator/data/model/creator_model.dart';
+import 'package:flutter_user_app/features/creator/data/model/creators_model.dart';
 import 'package:flutter_user_app/features/creator/presentation/tabs/creator_about_tab.dart';
 import 'package:flutter_user_app/features/creator/presentation/tabs/creator_calender_tab.dart';
 import 'package:flutter_user_app/features/creator/presentation/tabs/creator_gallery_tab.dart';
+import 'package:flutter_user_app/features/temples/data/models/temple_model.dart';
+import 'package:flutter_user_app/features/temples/data/models/review_model.dart';
+
+import 'package:flutter_user_app/features/temples/presentation/tabs/temple_about_tab.dart';
+import 'package:flutter_user_app/features/temples/presentation/tabs/temple_calender_tab.dart';
+import 'package:flutter_user_app/features/temples/presentation/tabs/temple_gallery_tab.dart';
+import 'package:flutter_user_app/features/temples/presentation/tabs/temple_review_tab.dart';
 
 class CreatorProfileTabs extends StatelessWidget {
   final TabController tabController;
-  final CreatorModel profile;
+  final CreatorsModel profile;
 
   const CreatorProfileTabs({
     super.key,
@@ -17,16 +24,22 @@ class CreatorProfileTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Expanded(
       child: Column(
         children: [
           TabBar(
             controller: tabController,
-            labelColor: Colors.blue,
-            unselectedLabelColor: Colors.grey,
-            indicatorColor: Colors.blue,
+            labelColor: theme.colorScheme.primary,
+            unselectedLabelColor: theme.colorScheme.outline,
+            indicatorColor: theme.colorScheme.primary,
+            labelStyle: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
             tabs: [
               Tab(text: 'About'),
+              Tab(text: 'Review'),
               Tab(text: 'Gallery'),
               Tab(text: 'Calendar'),
             ],
@@ -36,6 +49,8 @@ class CreatorProfileTabs extends StatelessWidget {
               controller: tabController,
               children: [
                 CreatorAboutTab(profile: profile),
+                CreatorAboutTab(profile: profile),
+                
                 CreatorGalleryTab(),
                 CreatorCalendarTab(),
               ],

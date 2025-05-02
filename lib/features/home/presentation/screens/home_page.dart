@@ -38,10 +38,15 @@ class _HomePageState extends State<HomePage>
   }
 
   void _onTabChange(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    _controller.forward().then((_) => _controller.reverse());
+    _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 1000), // Adjust duration as needed
+      curve: Curves
+          .easeInOutCirc, // Experiment with different curves (e.g., easeOutQuint, fastLinearToSlowEaseIn)
+    );
+    // You can keep the controller animation for the icon if you like,
+    // but the page transition is now handled by animateToPage.
+    // _controller.forward().then((_) => _controller.reverse());
   }
 
   @override

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_user_app/widgets/custom_widgets/custom_appbar.dart';
 import 'package:flutter_user_app/widgets/custom_widgets/custom_text_widget.dart';
 
-class CreatorDonationScreen extends StatelessWidget {
-  const CreatorDonationScreen({Key? key}) : super(key: key);
+class DonationScreen extends StatelessWidget {
+  const DonationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,19 +16,12 @@ class CreatorDonationScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Title and description
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomTextWidget(
-                    title: 'Donation Received',
-                    subtitle:
-                        'Please choose what types of support do you need and let us know.',
-                  )
-                ],
-              ),
+            CustomTextWidget(
+              title: 'Donation Received',
+              subtitle:
+                  'Please choose what types of support do you need and let us know.',
             ),
+
             const SizedBox(height: 24.0),
             // Total Amount section
             Padding(

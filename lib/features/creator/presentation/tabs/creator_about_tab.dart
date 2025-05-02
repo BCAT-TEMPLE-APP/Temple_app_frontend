@@ -1,14 +1,17 @@
 // tabs/about_tab.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_user_app/features/creator/data/model/creator_model.dart';
+import 'package:flutter_user_app/features/creator/data/model/creators_model.dart';
+import 'package:flutter_user_app/features/temples/data/models/temple_model.dart';
+import 'package:readmore/readmore.dart';
 
 class CreatorAboutTab extends StatelessWidget {
-  final CreatorModel profile;
+  final CreatorsModel profile;
 
   const CreatorAboutTab({super.key, required this.profile});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SingleChildScrollView(
       padding: EdgeInsets.all(16),
       child: Column(
@@ -22,95 +25,40 @@ class CreatorAboutTab extends StatelessWidget {
             ),
           ),
           SizedBox(height: 8),
-          Text(
-            'Ex nox tempor sit laboris p, occaecat reprehenderit ullamco aliqua reprehenderit exercitation ea',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[600],
-            ),
-          ),
-          SizedBox(height: 24),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Recommendations',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                '${profile.recommendationPercentage}%',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 8),
-          LinearProgressIndicator(
-            value: profile.recommendationPercentage / 100,
-            backgroundColor: Colors.grey[300],
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-          ),
-          SizedBox(height: 24),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Ratings',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Row(
-                children: [
-                  Icon(Icons.star, color: Colors.amber, size: 20),
-                  SizedBox(width: 4),
-                  Text(
-                    '${profile.rating}',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+          Padding(
+            padding: const EdgeInsets.only(left: 15.0, right: 15),
+            child: Container(
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(12.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 2,
+                    offset: const Offset(0, 1),
                   ),
                 ],
               ),
-            ],
-          ),
-          SizedBox(height: 8),
-          _buildRatingBar(5, 0.7),
-          _buildRatingBar(4, 0.2),
-          _buildRatingBar(3, 0.05),
-          _buildRatingBar(2, 0.03),
-          _buildRatingBar(1, 0.02),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildRatingBar(int stars, double percentage) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        children: [
-          Text(
-            '$stars',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[600],
-            ),
-          ),
-          SizedBox(width: 8),
-          Expanded(
-            child: LinearProgressIndicator(
-              value: percentage,
-              backgroundColor: Colors.grey[300],
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-              minHeight: 8,
+              padding: const EdgeInsets.all(16.0),
+              child: ReadMoreText(
+                profile.description,
+                style: const TextStyle(fontSize: 16),
+                trimMode: TrimMode.Line,
+                trimLines: 8,
+                trimCollapsedText: 'Read More',
+                trimExpandedText: 'Read Less',
+                moreStyle: TextStyle(
+                  color: theme.colorScheme.primary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                lessStyle: TextStyle(
+                  color: theme.colorScheme.primary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
         ],
@@ -118,4 +66,3 @@ class CreatorAboutTab extends StatelessWidget {
     );
   }
 }
-

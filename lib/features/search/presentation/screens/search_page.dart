@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_user_app/core/helper/navigation_helper.dart';
+import 'package:flutter_user_app/features/creator/presentation/screens/creator_page.dart';
 import 'package:flutter_user_app/features/profile/presentation/screens/following_page.dart';
 import 'package:flutter_user_app/features/temples/data/dummy/temples_dummy_data.dart';
+import 'package:flutter_user_app/features/creator/data/dummy/creators_dummy_data.dart';
 import 'package:flutter_user_app/features/temples/presentation/screens/temple_page.dart';
 import 'package:flutter_user_app/widgets/card_widgets/custom_creator_card.dart';
 import 'package:flutter_user_app/widgets/custom_widgets/custom_page_bar.dart';
@@ -321,12 +323,22 @@ class _SearchPageState extends State<SearchPage>
             const SizedBox(height: 24),
 
             // Most Popular Creator Section
-            const Text(
-              'Most Popular Creator',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Most Popular Creator',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text('See All',
+                      style: TextStyle(color: theme.colorScheme.primary)),
+                ),
+              ],
             ),
 
             const SizedBox(height: 18),
@@ -334,40 +346,29 @@ class _SearchPageState extends State<SearchPage>
             // Creator Cards with Horizontal Scroll
             SizedBox(
               height: 200,
-              child: ListView(
+              child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.only(bottom: 8),
-                children: const [
-                  CreatorCard(
-                    image: 'https://randomuser.me/api/portraits/men/32.jpg',
-                    name: 'Shayam',
-                    subtitle: 'Shayam Verma',
-                  ),
-                  SizedBox(width: 24), // Increased spacing between cards
-                  CreatorCard(
-                    image: 'https://randomuser.me/api/portraits/men/33.jpg',
-                    name: 'Shayam',
-                    subtitle: 'Shayam Verma',
-                  ),
-                  SizedBox(width: 24), // Increased spacing between cards
-                  CreatorCard(
-                    image: 'https://randomuser.me/api/portraits/men/34.jpg',
-                    name: 'Shayam',
-                    subtitle: 'Shayam Verma',
-                  ),
-                  SizedBox(width: 24), // Increased spacing between cards
-                  CreatorCard(
-                    image: 'https://randomuser.me/api/portraits/men/35.jpg',
-                    name: 'Shayam',
-                    subtitle: 'Shayam Verma',
-                  ),
-                  SizedBox(width: 24), // Increased spacing between cards
-                  CreatorCard(
-                    image: 'https://randomuser.me/api/portraits/men/36.jpg',
-                    name: 'Shayam',
-                    subtitle: 'Shayam Verma',
-                  ),
-                ],
+                itemCount: dummyCreators.length,
+                separatorBuilder: (_, __) => const SizedBox(width: 24),
+                itemBuilder: (context, index) {
+                  final creator = dummyCreators[index];
+                  return Hero(
+                    tag: creator.imageUrl,
+                    createRectTween: (Rect? begin, Rect? end) {
+                      return CustomRectTween(begin: begin, end: end);
+                    },
+                    child: CreatorCard(
+                      creatorsModel: creator,
+                      onTap: () {
+                        navigateToPage(
+                            context,
+                            CreatorPage(
+                              creatorsModel: creator,
+                            )); // Pass temple if needed
+                      },
+                    ),
+                  );
+                },
               ),
             ),
           ],
