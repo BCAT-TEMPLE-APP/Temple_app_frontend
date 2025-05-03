@@ -34,15 +34,40 @@ class _PostWidgetState extends State<PostWidget>
   bool _isAnimatingLike = true; // true for like, false for unlike
 
   late AnimationController _animationController;
+  late AnimationController _commentAnimationController;
+
   late Animation<double> _scaleAnimation;
   late Animation<double> _fadeAnimation;
+
+  void _showCommentsSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      transitionAnimationController: _animationController,
+      builder: (context) => SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0, 1),
+          end: Offset.zero,
+        ).animate(CurvedAnimation(
+          parent: _animationController,
+          curve: Curves.easeOut,
+        )),
+        child: BlocProvider(
+          create: (_) => CommentBloc(PostCommentRepositoryImpl()),
+          child: PostCommentsSheet(postId: widget.postModel.id),
+        ),
+      ),
+    );
+    _animationController.forward(from: 0);
+  }
 
   @override
   void initState() {
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1000), // Duration of the animation
+      duration: const Duration(milliseconds: 800), // Duration of the animation
     );
 
     _scaleAnimation = Tween<double>(begin: 0.5, end: 1.5).animate(
@@ -279,17 +304,7 @@ class _PostWidgetState extends State<PostWidget>
                         BlendMode.srcIn,
                       ),
                     ),
-                    onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        builder: (_) => BlocProvider(
-                          create: (_) =>
-                              CommentBloc(PostCommentRepositoryImpl()),
-                          child: PostCommentsSheet(postId: widget.postModel.id),
-                        ),
-                      );
-                    },
+                    onTap: () => _showCommentsSheet(),
                   ),
                   const SizedBox(width: 8),
                   _buildAnimatedButton(

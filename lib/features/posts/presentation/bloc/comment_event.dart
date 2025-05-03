@@ -9,7 +9,8 @@ sealed class CommentEvent extends Equatable {
 
 class LoadCommentsEvent extends CommentEvent {
   final String postId;
-  const LoadCommentsEvent(this.postId);
+  final bool initiallyExpanded;
+  const LoadCommentsEvent(this.postId, {this.initiallyExpanded = false});
 
   @override
   List<Object> get props => [postId];
