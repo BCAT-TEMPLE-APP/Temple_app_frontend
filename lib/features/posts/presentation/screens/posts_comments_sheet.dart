@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_context_menu/flutter_context_menu.dart';
 import 'package:flutter_user_app/features/posts/domain/entities/post_comment_entity.dart';
 import 'package:flutter_user_app/features/posts/data/model/post_comment_model.dart';
 import 'package:flutter_user_app/features/posts/presentation/bloc/comment_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_user_app/features/posts/presentation/widgets/comment_context_menu.dart';
 import 'package:like_button/like_button.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -92,90 +94,17 @@ class _PostCommentsSheetState extends State<PostCommentsSheet> {
     }
   }
 
-  void _showCommentOptions(BuildContext context, String commentId) {
-    showModalBottomSheet(
+  void _showCommentOptions(BuildContext context, PostCommentEntity comment) {
+    final menu = CommentContextMenu.buildMenu(
+      commentId: comment.id,
       context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) {
-        return Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surface,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-          ),
-          child: SafeArea(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Drag handle
-                Container(
-                  margin: const EdgeInsets.only(top: 8),
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color:
-                        Theme.of(context).colorScheme.outline.withOpacity(0.5),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
+      comment: comment,
+    );
 
-                ListTile(
-                  leading: const Icon(Icons.delete_outline),
-                  title: const Text('Delete comment'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    context
-                        .read<CommentBloc>()
-                        .add(DeleteCommentEvent(commentId));
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(Icons.content_copy_outlined),
-                  title: const Text('Copy text'),
-                  onTap: () {
-                    // Find the text for this comment
-                    final state = context.read<CommentBloc>().state;
-                    if (state is CommentLoaded) {
-                      String? commentText;
-
-                      // Search in top-level comments
-                      for (var comment in state.comments) {
-                        if (comment.id == commentId) {
-                          commentText = comment.text;
-                          break;
-                        }
-
-                        // Search in replies
-                        if (comment.replies != null) {
-                          for (var reply in comment.replies!) {
-                            if (reply.id == commentId) {
-                              commentText = reply.text;
-                              break;
-                            }
-                          }
-                          if (commentText != null) break;
-                        }
-                      }
-
-                      if (commentText != null) {
-                        Clipboard.setData(ClipboardData(text: commentText));
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Comment copied to clipboard'),
-                            duration: Duration(seconds: 2),
-                          ),
-                        );
-                      }
-                    }
-                    Navigator.pop(context);
-                  },
-                ),
-                const SizedBox(height: 8),
-              ],
-            ),
-          ),
-        );
-      },
+    // Show context menu at current pointer position
+    showContextMenu(
+      context,
+      contextMenu: menu,
     );
   }
 
@@ -450,8 +379,12 @@ class _PostCommentsSheetState extends State<PostCommentsSheet> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Main comment
-          GestureDetector(
-            onLongPress: () => _showCommentOptions(context, comment.id),
+          ContextMenuRegion(
+            contextMenu: CommentContextMenu.buildMenu(
+              commentId: comment.id,
+              context: context,
+              comment: comment,
+            ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -470,7 +403,7 @@ class _PostCommentsSheetState extends State<PostCommentsSheet> {
                           style: TextStyle(color: theme.colorScheme.onSurface),
                           children: [
                             TextSpan(
-                              text: comment.username,
+                              text: "${comment.username}:",
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,
@@ -546,16 +479,13 @@ class _PostCommentsSheetState extends State<PostCommentsSheet> {
                         if (displayCount == 0) {
                           return const SizedBox.shrink();
                         }
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 4),
-                          child: Text(
-                            displayCount.toString(),
-                            style: TextStyle(
-                                color: isLiked
-                                    ? Colors.red
-                                    : theme.colorScheme.onSurface,
-                                fontSize: 12),
-                          ),
+                        return Text(
+                          displayCount.toString(),
+                          style: TextStyle(
+                              color: isLiked
+                                  ? Colors.red
+                                  : theme.colorScheme.onSurface,
+                              fontSize: 12),
                         );
                       },
                     ),
@@ -577,16 +507,11 @@ class _PostCommentsSheetState extends State<PostCommentsSheet> {
                     ),
                 child: Row(
                   children: [
-                    Container(
-                      width: 24,
-                      height: 1,
-                      color: theme.colorScheme.outline.withOpacity(0.5),
-                    ),
-                    const SizedBox(width: 8),
+                    const SizedBox(height: 22),
                     Text(
                       comment.isExpanded
                           ? 'Hide replies'
-                          : 'View ${comment.replies!.length} ${comment.replies!.length == 1 ? 'reply' : 'replies'}',
+                          : 'View ${comment.replies!.length} ${comment.replies!.length == 1 ? 'reply' : ' more replies'}',
                       style: TextStyle(
                         color: theme.colorScheme.outline,
                         fontSize: 12,

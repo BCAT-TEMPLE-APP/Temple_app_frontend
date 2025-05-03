@@ -39,7 +39,6 @@ class CreatorProfileTabs extends StatelessWidget {
             ),
             tabs: [
               Tab(text: 'About'),
-              Tab(text: 'Review'),
               Tab(text: 'Gallery'),
               Tab(text: 'Calendar'),
             ],
@@ -49,8 +48,6 @@ class CreatorProfileTabs extends StatelessWidget {
               controller: tabController,
               children: [
                 CreatorAboutTab(profile: profile),
-                CreatorAboutTab(profile: profile),
-                
                 CreatorGalleryTab(),
                 CreatorCalendarTab(),
               ],

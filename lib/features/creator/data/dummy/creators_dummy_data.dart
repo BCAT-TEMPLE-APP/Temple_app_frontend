@@ -3,10 +3,12 @@ import 'package:flutter_user_app/features/creator/data/model/donation_model.dart
 
 final List<CreatorsModel> dummyCreators = [
   CreatorsModel(
-    name: 'Swami Avdheshanand Giri',
+    name: 'Premanand Ji Maharaj',
     title: 'Acharya Mahamandaleshwar of Juna Akhara',
-    description: 'Swami Avdheshanand Giri is a spiritual leader and the Acharya Mahamandaleshwar of Juna Akhara, one of the largest and oldest orders of Hindu saints and monks in India. He has been instrumental in spreading spiritual knowledge and conducting various humanitarian activities.',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/ef/Shri_Hit_Premanand_Govind_Sharan_Ji_Maharaj_002_year_2023_%28cropped%29.jpg',
+    description:
+        'Swami Avdheshanand Giri is a spiritual leader and the Acharya Mahamandaleshwar of Juna Akhara, one of the largest and oldest orders of Hindu saints and monks in India. He has been instrumental in spreading spiritual knowledge and conducting various humanitarian activities.',
+    imageUrl:
+        'https://upload.wikimedia.org/wikipedia/commons/e/ef/Shri_Hit_Premanand_Govind_Sharan_Ji_Maharaj_002_year_2023_%28cropped%29.jpg',
     rating: 4.9,
     totalReviews: 250,
     posts: 150,
@@ -28,12 +30,13 @@ final List<CreatorsModel> dummyCreators = [
     totalDonations: 150000,
     location: 'Haridwar, Uttarakhand',
   ),
-  
   CreatorsModel(
     name: 'Sadhguru Jaggi Vasudev',
     title: 'Founder of Isha Foundation',
-    description: 'Sadhguru is a yogi, mystic, and visionary. He has established Isha Foundation, a non-profit organization dedicated to raising human consciousness through yoga and meditation programs.',
-    imageUrl: 'https://static.gujaratsamachar.com/content_image/content_image_89567c18-f9e9-4baf-8f37-53e5daebe829.jpeg',
+    description:
+        'Sadhguru is a yogi, mystic, and visionary. He has established Isha Foundation, a non-profit organization dedicated to raising human consciousness through yoga and meditation programs.',
+    imageUrl:
+        'https://static.gujaratsamachar.com/content_image/content_image_89567c18-f9e9-4baf-8f37-53e5daebe829.jpeg',
     rating: 4.8,
     totalReviews: 320,
     posts: 200,
@@ -55,12 +58,13 @@ final List<CreatorsModel> dummyCreators = [
     totalDonations: 280000,
     location: 'Coimbatore, Tamil Nadu',
   ),
-
   CreatorsModel(
     name: 'Gaur Gopal Das',
     title: 'ISKCON Spiritual Leader & Life Coach',
-    description: 'Gaur Gopal Das is a lifestyle coach and monk in the International Society for Krishna Consciousness (ISKCON). He is known for his practical wisdom and modern approach to spirituality.',
-    imageUrl: 'https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2024/11/baba-bageshwar-1732616904.webp',
+    description:
+        'Gaur Gopal Das is a lifestyle coach and monk in the International Society for Krishna Consciousness (ISKCON). He is known for his practical wisdom and modern approach to spirituality.',
+    imageUrl:
+        'https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2024/11/baba-bageshwar-1732616904.webp',
     rating: 4.7,
     totalReviews: 180,
     posts: 120,

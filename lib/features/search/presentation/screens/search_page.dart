@@ -352,21 +352,16 @@ class _SearchPageState extends State<SearchPage>
                 separatorBuilder: (_, __) => const SizedBox(width: 24),
                 itemBuilder: (context, index) {
                   final creator = dummyCreators[index];
-                  return Hero(
-                    tag: creator.imageUrl,
-                    createRectTween: (Rect? begin, Rect? end) {
-                      return CustomRectTween(begin: begin, end: end);
+
+                  return CreatorCard(
+                    creatorsModel: creator,
+                    onTap: () {
+                      navigateToPage(
+                          context,
+                          CreatorPage(
+                            creatorsModel: creator,
+                          )); // Pass temple if needed
                     },
-                    child: CreatorCard(
-                      creatorsModel: creator,
-                      onTap: () {
-                        navigateToPage(
-                            context,
-                            CreatorPage(
-                              creatorsModel: creator,
-                            )); // Pass temple if needed
-                      },
-                    ),
                   );
                 },
               ),
